@@ -1,5 +1,3 @@
-import { listenerCount } from "process";
-
 interface Color {
     fg: string;
     bg: string;

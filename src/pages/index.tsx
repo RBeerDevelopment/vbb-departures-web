@@ -1,7 +1,8 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { type NextPage } from "next";
 import Head from "next/head";
-import React, { useEffect, useRef, useState } from "react";
+import type { LegacyRef } from "react";
+import React, { useState } from "react";
 import { DebouncedInput } from "../components/debounced-input";
 import { LoadingIndicator } from "../components/loading-indicator";
 import { SearchResultItem } from "../components/search-result-item";
@@ -28,7 +29,7 @@ const Home: NextPage = () => {
           <span className="text-red-600">VBB</span> Departures
         </h1>
         <DebouncedInput value={searchQuery} onChange={setSearchQuery} />
-        <div ref={parent} className="bg-white flex flex-col max-h-96 overflow-y-scroll gap-1 mt-4 shadow-lg rounded-lg w-1/3 divide-y divide-dashed">
+        <div ref={parent as LegacyRef<HTMLDivElement>} className="bg-white flex flex-col max-h-96 overflow-y-scroll gap-1 mt-4 shadow-lg rounded-lg w-1/3 divide-y divide-dashed">
           {isFetching ? <LoadingIndicator /> :
             (stations?.length || 0) > 0 ? stations?.map(s => <SearchResultItem key={s.id} location={s} />) : null
           }

@@ -28,7 +28,6 @@ export function mapLocationResponseToLocation(resp: LocationResponse): LocationM
     return {
         id: resp.id,
         type: resp.type,
-        id: resp.id,
         name: resp.name,
         products: resp.products
     }
