@@ -30,7 +30,7 @@ const Home: NextPage = () => {
         <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
           <span className="text-red-600">VBB</span> Departures
         </h1>
-        <DebouncedInput value={searchQuery} onChange={setSearchQuery} />
+        <DebouncedInput value={searchQuery} onChange={setSearchQuery} placeholder="Station Name" />
         <div ref={parent as LegacyRef<HTMLDivElement>} className="bg-white flex flex-col max-h-96 overflow-y-scroll gap-1 mt-4 shadow-lg rounded-lg lg:w-1/3 w-3/4 divide-y divide-dashed">
           {isFetching ? <LoadingIndicator /> :
             (stations?.length || 0) > 0 ? stations?.map(s => <SearchResultItem key={s.id} location={s} />) : null
