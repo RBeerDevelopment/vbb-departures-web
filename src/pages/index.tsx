@@ -12,7 +12,9 @@ import { trpc } from "../utils/trpc";
 const Home: NextPage = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
-  const { data: stations, isFetching } = trpc.location.byFuzzyName.useQuery({ query: searchQuery }, { enabled: searchQuery.length > 0 });
+  const { data: stations, isFetching } = trpc.location.byFuzzyName.useQuery({ query: searchQuery },
+    { enabled: searchQuery.length > 0, staleTime: Infinity }
+  );
 
   const [parent] = useAutoAnimate({ duration: 400 })
 
@@ -29,7 +31,7 @@ const Home: NextPage = () => {
           <span className="text-red-600">VBB</span> Departures
         </h1>
         <DebouncedInput value={searchQuery} onChange={setSearchQuery} />
-        <div ref={parent as LegacyRef<HTMLDivElement>} className="bg-white flex flex-col max-h-96 overflow-y-scroll gap-1 mt-4 shadow-lg rounded-lg w-1/3 divide-y divide-dashed">
+        <div ref={parent as LegacyRef<HTMLDivElement>} className="bg-white flex flex-col max-h-96 overflow-y-scroll gap-1 mt-4 shadow-lg rounded-lg lg:w-1/3 w-3/4 divide-y divide-dashed">
           {isFetching ? <LoadingIndicator /> :
             (stations?.length || 0) > 0 ? stations?.map(s => <SearchResultItem key={s.id} location={s} />) : null
           }

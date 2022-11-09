@@ -22,7 +22,7 @@ export function DebouncedInput(props: Props): React.ReactElement {
 
         const timeout = setTimeout(() => {
             onChange(localVal);
-        }, 300)
+        }, 500)
 
         return () => {
             clearTimeout(timeout)
@@ -33,6 +33,6 @@ export function DebouncedInput(props: Props): React.ReactElement {
         setLocalVal(event.target.value)
     }
     return (
-        <input type="text" className="bg-white w-1/3 text-black shadow-lg mt-8 text-md rounded-md focus:border-red-700 p-2.5" onChange={handleOnChange} />
+        <input type="text" className="bg-white lg:w-1/3 w-3/4 text-black shadow-lg mt-8 text-md rounded-md focus:border-red-700 p-2.5" onChange={handleOnChange} />
     );
 }
