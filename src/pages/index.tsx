@@ -16,6 +16,8 @@ const Home: NextPage = () => {
     { enabled: searchQuery.length > 0, staleTime: Infinity }
   );
 
+  console.log(stations)
+
   const [parent] = useAutoAnimate({ duration: 400 })
 
   return (

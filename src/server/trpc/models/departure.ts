@@ -1,3 +1,5 @@
+import type { TransportType } from "./transport-type";
+
 interface Color {
     fg: string;
     bg: string;
@@ -8,7 +10,7 @@ export interface Line {
     id: string;
     name: string;
     productName: string;
-    mode: string;
+    mode: TransportType;
     product: string;
     symbol: string;
     nr: number;
@@ -43,8 +45,8 @@ export interface Departure {
     delay: number
     direction: string
     lineName: string
+    transportType: TransportType
     destinationName: string
-    lineColor: Color
 }
 
 export function mapDepartureResponseToDeparture(resp: DepatureResponse): Departure {
@@ -54,7 +56,7 @@ export function mapDepartureResponseToDeparture(resp: DepatureResponse): Departu
         delay: resp.delay,
         direction: resp.direction,
         lineName: resp.line.name,
+        transportType: resp.line.mode,
         destinationName: resp.destination.name,
-        lineColor: resp.line.color
     }
 }
