@@ -1,6 +1,7 @@
 import React from "react";
 import type { Departure } from "../server/trpc/models/departure";
 import { formatTime } from "../utils/format-time";
+import { DelayText } from "./delay-text";
 
 interface Props {
     departure: Departure
@@ -12,10 +13,9 @@ export function DepartureCard(props: Props): React.ReactElement {
 
     let lineNameTextColor = "text-white";
 
-    console.log({ lineNumber: departure.lineName, isNaN: isNaN(+departure.lineName), isLarger89: Number(departure.lineName) > 89 })
     if (!isNaN(+departure.lineName) && Number(departure.lineName) > 89) {
         console.log("entered if")
-        lineNameTextColor = "text-black"
+        lineNameTextColor = "text-black border border-black"
     }
 
     return (
@@ -23,8 +23,10 @@ export function DepartureCard(props: Props): React.ReactElement {
             <span className={`px-2 py-2 h-12 w-12 ${lineNameTextColor} text-center text-xl rounded-lg bg-${departure.lineName.toLowerCase()}`}>{departure.lineName}</span>
             <div className="flex flex-col overflow-hidden">
                 <p className="font-thin text-lg overflow-hidden whitespace-nowrap text-ellipsis">{departure.direction}</p>
-                <p className="font-bold text-md">{formatTime(departure.when)}</p>
-
+                <div className="flex flex-row gap-3">
+                    <p className="font-bold text-md">{formatTime(departure.when)}</p>
+                    <DelayText delay={departure.delay} />
+                </div>
             </div>
         </ div>
     );

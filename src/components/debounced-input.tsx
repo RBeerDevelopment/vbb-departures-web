@@ -10,8 +10,6 @@ export function DebouncedInput(props: Props): React.ReactElement {
 
     const { value, onChange, placeholder = "" } = props;
 
-
-    console.log({ placeholder })
     const [localVal, setLocalVal] = useState(value);
 
     const firstRender = useRef(true)

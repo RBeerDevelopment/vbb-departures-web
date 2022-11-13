@@ -5,6 +5,7 @@ import type { LegacyRef } from "react";
 import React, { useState } from "react";
 import { DebouncedInput } from "../components/debounced-input";
 import { LoadingIndicator } from "../components/loading-indicator";
+import { NavBar } from "../components/nav-bar";
 import { SearchResultItem } from "../components/search-result-item";
 
 import { trpc } from "../utils/trpc";
@@ -15,8 +16,6 @@ const Home: NextPage = () => {
   const { data: stations, isFetching } = trpc.location.byFuzzyName.useQuery({ query: searchQuery },
     { enabled: searchQuery.length > 0, staleTime: Infinity }
   );
-
-  console.log(stations)
 
   const [parent] = useAutoAnimate({ duration: 400 })
 
@@ -29,6 +28,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="w-full mx-auto flex min-h-screen flex-col items-center justify-center bg-slate-300">
+        <NavBar isMain={true} />
         <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
           <span className="text-red-600">VBB</span> Departures
         </h1>
