@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { DebouncedInput } from "../components/debounced-input";
 import { LoadingIndicator } from "../components/loading-indicator";
 import { NavBar } from "../components/nav-bar";
+import { NearbyInput } from "../components/nearby-input";
 import { SearchResultItem } from "../components/search-result-item";
 
 import { trpc } from "../utils/trpc";
@@ -13,11 +14,33 @@ import { trpc } from "../utils/trpc";
 const Home: NextPage = () => {
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [userCoords, setUserCoords] = useState<GeolocationCoordinates>();
+
   const { data: stations, isFetching } = trpc.location.byFuzzyName.useQuery({ query: searchQuery },
     { enabled: searchQuery.length > 0, staleTime: Infinity }
   );
 
+  const { data: nearbyStatios, isFetching: isFetchingNearby } = trpc.location.byLocation.useQuery(
+    { lat: userCoords?.latitude || 0, long: userCoords?.longitude || 0 },
+    { enabled: Boolean(userCoords), staleTime: Infinity }
+  );
+
+  const [isLoadingLocation, setIsLocationLoading] = useState(false)
+
   const [parent] = useAutoAnimate({ duration: 400 })
+
+  function queryNearby() {
+    setIsLocationLoading(true);
+    if (!navigator.geolocation) {
+      return;
+    }
+    setSearchQuery("")
+    navigator.geolocation.getCurrentPosition((pos) => {
+      setUserCoords(pos.coords);
+      setIsLocationLoading(false);
+    }, () => setIsLocationLoading(false))
+
+  }
 
   return (
     <>
@@ -34,10 +57,12 @@ const Home: NextPage = () => {
         </h1>
         <DebouncedInput value={searchQuery} onChange={setSearchQuery} placeholder="Station Name" />
         <div ref={parent as LegacyRef<HTMLDivElement>} className="bg-white flex flex-col max-h-96 overflow-y-scroll gap-1 mt-4 shadow-lg rounded-lg lg:w-1/3 w-3/4 divide-y divide-dashed">
-          {isFetching ? <LoadingIndicator /> :
-            (stations?.length || 0) > 0 ? stations?.map(s => <SearchResultItem key={s.id} location={s} />) : null
+          {isFetching || isFetchingNearby ? <LoadingIndicator /> :
+            (stations?.length || 0) > 0 ? stations?.map(s => <SearchResultItem key={s.id} location={s} />) :
+              (nearbyStatios?.length || 0) > 0 ? nearbyStatios?.map(s => <SearchResultItem key={s.id} location={s} />) : null
           }
         </div>
+        <NearbyInput onClick={queryNearby} isLoading={isLoadingLocation} />
       </main>
     </>
   );

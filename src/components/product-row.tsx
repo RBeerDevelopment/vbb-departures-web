@@ -5,10 +5,6 @@ interface Props {
     products: Products
 }
 
-const prodcutIconMap = {
-
-}
-
 interface Icon {
     letter: string
     color: string

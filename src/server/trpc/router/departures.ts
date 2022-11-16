@@ -8,7 +8,7 @@ import { router, publicProcedure } from "../trpc";
 
 export const departureRouter = router({
     byStationId: publicProcedure
-        .input(z.object({ stationId: z.string(), resultCount: z.number().default(10), duration: z.number().default(20) }))
+        .input(z.object({ stationId: z.string(), resultCount: z.number().default(15), duration: z.number().default(30) }))
         .query(async ({ input }) => {
 
             const { stationId, resultCount, duration } = input;

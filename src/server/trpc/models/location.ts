@@ -1,3 +1,5 @@
+import { number } from "zod";
+
 export interface Products {
     suburban: boolean;
     subway: boolean;
@@ -15,6 +17,7 @@ export interface LocationResponse {
     products: Products;
     latitude?: number;
     longitude?: number;
+    distance?: number;
 }
 
 export interface LocationModel {
@@ -22,6 +25,7 @@ export interface LocationModel {
     id: string;
     name: string;
     products: Products
+    distance?: number
 }
 
 export function mapLocationResponseToLocation(resp: LocationResponse): LocationModel {
@@ -29,6 +33,7 @@ export function mapLocationResponseToLocation(resp: LocationResponse): LocationM
         id: resp.id,
         type: resp.type,
         name: resp.name,
-        products: resp.products
+        products: resp.products,
+        distance: resp.distance
     }
 }

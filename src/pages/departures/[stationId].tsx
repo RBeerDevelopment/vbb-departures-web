@@ -2,7 +2,8 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { type NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React from "react";
+import type { ReactNode } from "react";
+import React, { ReactElement } from "react";
 import { DepartureCard } from "../../components/departure-card";
 import { LoadingIndicator } from "../../components/loading-indicator";
 import { NavBar } from "../../components/nav-bar";
@@ -17,7 +18,7 @@ const Departures: NextPage = () => {
 
     const { data: departures, isFetching } = trpc.departure.byStationId.useQuery({ stationId: String(stationId) }, { enabled: Boolean(stationId) })
 
-    let content = null;
+    let content: ReactNode = <p className="italic ">No departures found within the next 30 minutes.</p>;
 
     if (isFetching) {
         content = <LoadingIndicator />
@@ -36,9 +37,11 @@ const Departures: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main className="w-full mx-auto flex h-screen flex-col items-center justify-center bg-slate-300 overflow-y-hidden">
+            <main className="w-full mx-auto flex h-screen flex-col justify-center bg-slate-300">
                 <NavBar />
-                {content}
+                <div className="overflow-y-scroll w-full flex flex-col mx-auto items-center pb-16">
+                    {content}
+                </div>
             </main>
         </>
     );
