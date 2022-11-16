@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import type { Departure } from "../server/trpc/models/departure";
 import { formatTime } from "../utils/format-time";
@@ -19,7 +20,8 @@ export function DepartureCard(props: Props): React.ReactElement {
     }
 
     return (
-        <div className="bg-white rounded-md w-11/12 md:w-1/2 py-3 px-2 my-2 flex flex-row gap-2">
+        <Link className="bg-white rounded-md w-11/12 md:w-1/2 py-3 px-2 my-2 flex flex-row gap-2" href={`/trip/${departure.id}/${departure.lineName}`}>
+
             <span className={`px-2 py-2 h-12 w-12 ${lineNameTextColor} text-center text-xl rounded-lg bg-${departure.lineName.toLowerCase()}`}>{departure.lineName}</span>
             <div className="flex flex-col overflow-hidden">
                 <p className="font-thin text-lg overflow-hidden whitespace-nowrap text-ellipsis">{departure.direction}</p>
@@ -28,6 +30,6 @@ export function DepartureCard(props: Props): React.ReactElement {
                     <DelayText delay={departure.delay} />
                 </div>
             </div>
-        </ div>
+        </Link>
     );
 }

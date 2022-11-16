@@ -3,30 +3,31 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import type { ReactNode } from "react";
 import React from "react";
-import { DepartureCard } from "../../components/departure-card";
-import { LoadingIndicator } from "../../components/loading-indicator";
-import { NavBar } from "../../components/nav-bar";
+import { LoadingIndicator } from "../../../components/loading-indicator";
+import { NavBar } from "../../../components/nav-bar";
+import { TripSection } from "../../../components/trip-sections/trip-section";
 
-import { trpc } from "../../utils/trpc";
+import { trpc } from "../../../utils/trpc";
 
 const Departures: NextPage = () => {
 
     const router = useRouter()
-    const { stationId } = router.query
+    const { tripId, lineName } = router.query
 
 
-    const { data: departures, isFetching } = trpc.departure.byStationId.useQuery({ stationId: String(stationId) }, { enabled: Boolean(stationId) })
+    const { data: trip, isFetching } = trpc.trip.byTripId.useQuery({ tripId: tripId as string || "", lineName: lineName as string || "" }, { enabled: Boolean(tripId) && Boolean(lineName) })
 
-    let content: ReactNode = <p className="italic ">No departures found within the next 30 minutes.</p>;
+    let content: ReactNode = <p className="italic ">No data found for line {lineName}.</p>;
 
     if (isFetching) {
         content = <LoadingIndicator />
     }
 
-    if (departures && departures.length > 0) {
-        content = departures.map(d => (
-            <DepartureCard key={d.id} departure={d} />
-        ))
+    if (trip) {
+        content = (
+            <div className="flex flex-col gap-8">
+                <TripSection trip={trip} />
+            </div>);
     }
 
     return (

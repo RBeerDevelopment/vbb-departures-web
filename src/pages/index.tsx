@@ -25,7 +25,9 @@ const Home: NextPage = () => {
     { enabled: Boolean(userCoords), staleTime: Infinity }
   );
 
-  const [isLoadingLocation, setIsLocationLoading] = useState(false)
+  const [isLoadingLocation, setIsLocationLoading] = useState(false);
+  const [locationError, setLocationError] = useState<string>();
+
 
   const [parent] = useAutoAnimate({ duration: 400 })
 
@@ -38,7 +40,10 @@ const Home: NextPage = () => {
     navigator.geolocation.getCurrentPosition((pos) => {
       setUserCoords(pos.coords);
       setIsLocationLoading(false);
-    }, () => setIsLocationLoading(false))
+    }, (error) => {
+      setIsLocationLoading(false);
+      setLocationError(error.message)
+    })
 
   }
 
@@ -63,6 +68,7 @@ const Home: NextPage = () => {
           }
         </div>
         <NearbyInput onClick={queryNearby} isLoading={isLoadingLocation} />
+        <div>{locationError}</div>
       </main>
     </>
   );
