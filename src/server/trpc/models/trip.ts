@@ -169,6 +169,8 @@ export interface Trip {
     currentLocation: CurrentLocation
     updatedAt: number
 
+    polyline: Polyline
+
 }
 
 export function mapTripResponseToTrip(resp: TripResponse): Trip {
@@ -185,6 +187,7 @@ export function mapTripResponseToTrip(resp: TripResponse): Trip {
         lineName: resp.line.name,
         direction: resp.direction,
         currentLocation: resp.currentLocation,
-        updatedAt: resp.realtimeDataUpdatedAt
+        updatedAt: resp.realtimeDataUpdatedAt,
+        polyline: resp.polyline
     }
 }
