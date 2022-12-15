@@ -9,7 +9,6 @@ export function NearbyInput(props: Props): React.ReactElement {
 
     const { onClick, isLoading } = props;
 
-    console.log({ isLoading })
     return (
         <div className="flex flex-row items-center" onClick={onClick}>
             <p className="text-lg italic font-light text-red-600 mr-1">Near Me?</p>
