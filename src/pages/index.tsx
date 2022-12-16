@@ -1,6 +1,5 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { type NextPage } from "next";
-import Head from "next/head";
 import type { LegacyRef } from "react";
 import React, { useState } from "react";
 import { DebouncedInput } from "../components/debounced-input";

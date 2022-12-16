@@ -5,8 +5,6 @@
  */
 !process.env.SKIP_ENV_VALIDATION && (await import("./src/env/server.mjs"));
 
-
-
 import pwa from "next-pwa"
 
 const withPWA = pwa({
