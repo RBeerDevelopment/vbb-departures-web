@@ -19,8 +19,6 @@ export function DelayText(props: Props): React.ReactElement {
 
     else delayStr = ""
 
-    console.log({ color, delay, delayStr })
-
     return (
         <p className={`${color} text-md font-bold`}>
             {delayStr.length > 0 && `${delayStr} min`}

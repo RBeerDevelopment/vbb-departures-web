@@ -141,8 +141,8 @@ export interface TripResponse {
     line: Line;
     direction: string;
     currentLocation: CurrentLocation;
-    arrivalPlatform?: any;
-    plannedArrivalPlatform?: any;
+    arrivalPlatform?: string;
+    plannedArrivalPlatform?: string;
     arrivalPrognosisType: string;
     departurePlatform: string;
     plannedDeparturePlatform: string;
@@ -169,6 +169,8 @@ export interface Trip {
     currentLocation: CurrentLocation
     updatedAt: number
 
+    polyline: Polyline
+
 }
 
 export function mapTripResponseToTrip(resp: TripResponse): Trip {
@@ -179,12 +181,13 @@ export function mapTripResponseToTrip(resp: TripResponse): Trip {
         departureDelay: resp.departureDelay,
         departurePlattform: resp.departurePlatform,
         destination: resp.destination.name,
-        arrival: resp.arrival,
+        arrival: new Date(resp.arrival),
         arrivalDelay: resp.arrivalDelay,
-        arrivalPlattform: resp.arrivalPlatform,
+        arrivalPlattform: resp.arrivalPlatform || "",
         lineName: resp.line.name,
         direction: resp.direction,
         currentLocation: resp.currentLocation,
-        updatedAt: resp.realtimeDataUpdatedAt
+        updatedAt: resp.realtimeDataUpdatedAt,
+        polyline: resp.polyline
     }
 }
