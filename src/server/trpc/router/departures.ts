@@ -23,7 +23,6 @@ export const departureRouter = router({
             apiUrl.searchParams.append("pretty", "false");
             apiUrl.searchParams.append("remarks", "false");
 
-
             const resp = await axios.get<DepatureResponse[]>(apiUrl.toString());
 
             const data = resp.data.map(mapDepartureResponseToDeparture);
