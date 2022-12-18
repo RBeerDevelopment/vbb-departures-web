@@ -32,7 +32,7 @@ export function MapSection(props: Props): React.ReactElement {
     const visibleRect = calculateVisibleRectFromPolyline(polylinePoints);
     return (
         <>
-            <div className="h-96 w-screen p-4">
+            <div className="h-96 w-11/12 lg:w-1/2 rounded-lg">
                 <MapkitProvider tokenOrCallback="eyJhbGciOiJFUzI1NiIsImtpZCI6IjlNNjZER1hCOEsiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiI0UlQ4NE05OU40IiwiaWF0IjoxNjY4NzE1MTM0Ljg4Njk3LCJleHAiOjE2NzIzMTUxMzQuODg2OTd9.qwbb-HxaG0VSLGs8ASi8Gd4g7Ol9qD_L4sCWxS955tpcmKY_du3XgKgSXGiLMj83DqF77lXFitgV9wPpLrYnCQ">
                     <Map region={visibleRect} padding={12} >
                         <MapPolyline polylinePoints={polylinePoints} style={{ lineWidth: 5, strokeColor: lineColorCode }} />

@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { MapContext } from 'react-mapkit'
+import type { PolylinePoints } from './polyline-points'
 
-type NumberTuple = [number, number]
-export type PolylinePoints = NumberTuple[]
+
 
 type PolylineProps = {
     polylinePoints: PolylinePoints,

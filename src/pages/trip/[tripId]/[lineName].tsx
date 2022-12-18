@@ -5,8 +5,8 @@ import type { ReactNode } from "react";
 import React from "react";
 import { LoadingIndicator } from "../../../components/loading-indicator";
 import { NavBar } from "../../../components/nav-bar";
-import type { PolylinePoints } from "../../../components/trip-sections/map-polyline";
-import { MapSection } from "../../../components/trip-sections/map-section";
+import type { PolylinePoints } from "../../../components/map-section";
+import { MapSection } from "../../../components/map-section";
 import { TripSection } from "../../../components/trip-sections/trip-section";
 
 import { trpc } from "../../../utils/trpc";
@@ -44,7 +44,7 @@ const Departures: NextPage = () => {
 
     if (trip) {
         content = (
-            <div className="flex flex-col gap-8 items-center">
+            <div className="flex flex-col gap-8 items-center w-screen">
                 <TripSection trip={trip} />
                 <MapSection
                     lineName={trip.lineName}
