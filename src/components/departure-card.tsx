@@ -15,7 +15,6 @@ export function DepartureCard(props: Props): React.ReactElement {
     let lineNameTextColor = "text-white";
 
     if (!isNaN(+departure.lineName) && Number(departure.lineName) > 89) {
-        console.log("entered if")
         lineNameTextColor = "text-black border border-black"
     }
 
