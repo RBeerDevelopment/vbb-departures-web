@@ -11,8 +11,6 @@ export function TripSection(props: Props): React.ReactElement {
 
     const { trip } = props;
 
-    console.log({ arrival: trip.arrival, delay: trip.arrivalDelay })
-
     return (
         <div className="flex flex-col items-start bg-white w-11/12 lg:w-1/2 min-h-min rounded-md my-4 p-4">
             <h2 className={`text-2xl font-medium text-${trip.lineName.toLowerCase()}`}>{trip.lineName} ({trip.direction})</h2>
