@@ -38,7 +38,7 @@ export function MapSection(props: Props): React.ReactElement {
             <MapkitProvider tokenOrCallback={env.NEXT_PUBLIC_MAPKIT_TOKEN}>
                 <Map region={visibleRect} padding={12} showsUserLocation={true} isRotationEnabled={false} >
                     <MapPolyline polylinePoints={polylinePoints} style={{ lineWidth: 5, strokeColor: lineColorCode }} />
-                    <Marker latitude={currentLocation?.latitude} longitude={currentLocation?.longitude} />
+                    <Marker latitude={currentLocation?.latitude} longitude={currentLocation?.longitude} title="Train Location" />
                 </Map>
             </MapkitProvider>
         </div >
