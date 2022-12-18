@@ -3,13 +3,14 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import type { ReactNode } from "react";
 import React from "react";
-import { LoadingIndicator } from "../../../components/loading-indicator";
+import { LoadingIndicator } from "../../../components/loading-indicators/loading-indicator";
 import { NavBar } from "../../../components/nav-bar";
 import type { PolylinePoints } from "../../../components/map-section";
 import { MapSection } from "../../../components/map-section";
 import { TripSection } from "../../../components/trip-sections/trip-section";
 
 import { trpc } from "../../../utils/trpc";
+import { useCurrentRefetchFns } from "../../../components/refresh-button";
 
 const refetchInterval = 15 * 1000 // 15 sec
 const Departures: NextPage = () => {
@@ -18,7 +19,7 @@ const Departures: NextPage = () => {
     const { tripId, lineName } = router.query
 
 
-    const { data: trip, isFetching } = trpc.trip.byTripId.useQuery(
+    const { data: trip, isLoading, refetch } = trpc.trip.byTripId.useQuery(
         {
             tripId: tripId as string || "",
             lineName: lineName as string || ""
@@ -29,6 +30,8 @@ const Departures: NextPage = () => {
         }
     );
 
+    useCurrentRefetchFns([refetch]);
+
     let linePolyline: PolylinePoints | undefined = trip?.polyline?.features?.map(f => {
         if (!f.geometry.coordinates) return [NaN, NaN];
         return [f.geometry.coordinates[1] as number, f.geometry.coordinates[0] as number]
@@ -37,7 +40,7 @@ const Departures: NextPage = () => {
     linePolyline = linePolyline?.filter(p => !(isNaN(p[0]) || isNaN(p[1])))
     let content: ReactNode = <p className="italic ">No data found for line {lineName}.</p>;
 
-    if (isFetching) {
+    if (isLoading) {
         content = <LoadingIndicator />
     }
 
@@ -63,7 +66,7 @@ const Departures: NextPage = () => {
 
             <main className="w-full mx-auto flex h-screen flex-col justify-center bg-slate-300">
                 <NavBar />
-                <div className="overflow-y-scroll w-full flex flex-col mx-auto items-center pb-16">
+                <div className="overflow-y-scroll w-full flex flex-col mx-auto items-center py-16">
                     {content}
                 </div>
             </main>

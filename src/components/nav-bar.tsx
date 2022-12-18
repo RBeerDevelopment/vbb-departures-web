@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
+import { RefreshButton } from "./refresh-button";
 
 interface Props {
     isMain?: boolean
@@ -18,6 +19,9 @@ export function NavBar(props: Props): React.ReactElement {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
             </svg>
             <p className="font-light text-2xl text-white">VBB Departures</p>
+            <div className="absolute right-6">
+                <RefreshButton />
+            </div>
         </ div>
     );
 }

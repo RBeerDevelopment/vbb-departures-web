@@ -21,8 +21,6 @@ export const tripRouter = router({
             apiUrl.searchParams.append("polyline", "true");
             apiUrl.searchParams.append("pretty", "false");
 
-            console.log(apiUrl.toString())
-
             const resp = await axios.get<TripResponse>(apiUrl.toString());
 
             const data = mapTripResponseToTrip(resp.data);
