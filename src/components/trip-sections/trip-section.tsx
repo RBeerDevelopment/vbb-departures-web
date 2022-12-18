@@ -7,18 +7,16 @@ import type { PolylinePoint, PolylinePoints } from "../map-section";
 
 interface Props {
     trip: Trip,
-    polylinePoints: PolylinePoints
+    polylinePoints?: PolylinePoints
 }
 
 export function TripSection(props: Props): React.ReactElement {
 
     const { trip, polylinePoints } = props;
-
-
     const lineBgClass = `bg-${trip.lineName.toLowerCase()}`
 
     const currentLocationPolylinePoint: PolylinePoint = [trip.currentLocation?.latitude || 0, trip.currentLocation?.longitude || 0];
-    const tripProgress = calculateTripProgress(polylinePoints, currentLocationPolylinePoint);
+    const tripProgress = calculateTripProgress(polylinePoints || [], currentLocationPolylinePoint);
 
     return (
         <div className="flex flex-col items-start bg-white w-11/12 lg:w-1/2 min-h-min rounded-md my-4 p-4">
