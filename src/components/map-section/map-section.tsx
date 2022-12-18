@@ -13,6 +13,7 @@ import type { MapLocation } from "./map-location";
 
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from "../../../tailwind.config.cjs"
+import { findIndexOfClosestPoint } from "../../utils/coordinates";
 
 const tailwindConfigObj = resolveConfig(tailwindConfig)
 
@@ -32,20 +33,33 @@ export function MapSection(props: Props): React.ReactElement {
 
     const lineColorCode = tailwindConfigObj.theme?.colors[lineName.toLowerCase()]
 
-    const visibleRect = calculateVisibleRectFromPolyline(polylinePoints);
+    const region = calculateVisibleRegionFromPolyline(polylinePoints);
+
+    const currentLocationPolylinePoint = [currentLocation?.latitude || polylinePoints[0][0], currentLocation?.longitude || polylinePoints[0][1]];
+
+    const indexOfClosestPointOnLine = findIndexOfClosestPoint(currentLocationPolylinePoint, polylinePoints);
+
+    // also include current position as nearest point on line may be substantially behind train
+    // TODO: this does not account for a situation where the next point on the line is further than the train location
+    // this should be addressed in the future
+    const completedPolylinePoints = [...polylinePoints.slice(0, indexOfClosestPointOnLine), currentLocationPolylinePoint]
+
     return (
         <div className="h-96 w-11/12 lg:w-1/2 rounded-lg">
             <MapkitProvider tokenOrCallback={env.NEXT_PUBLIC_MAPKIT_TOKEN}>
-                <Map region={visibleRect} padding={12} showsUserLocation={true} isRotationEnabled={false} >
-                    <MapPolyline polylinePoints={polylinePoints} style={{ lineWidth: 5, strokeColor: lineColorCode }} />
-                    <Marker latitude={currentLocation?.latitude} longitude={currentLocation?.longitude} title="Train Location" />
+                <Map region={region} padding={12} showsUserLocation={true} isRotationEnabled={false} >
+                    {/* full line */}
+                    <MapPolyline polylinePoints={polylinePoints} style={{ lineWidth: 3, strokeColor: lineColorCode }} />
+                    {/* section of the line that has been completed */}
+                    <MapPolyline polylinePoints={completedPolylinePoints} style={{ lineWidth: 8, strokeColor: lineColorCode }} />
+                    {/* <Marker latitude={currentLocationPolylinePoint[0]} longitude={currentLocationPolylinePoint[1]} title="Train Location" /> */}
                 </Map>
             </MapkitProvider>
         </div >
     );
 }
 
-function calculateVisibleRectFromPolyline(polylinePoints: PolylinePoints) {
+function calculateVisibleRegionFromPolyline(polylinePoints: PolylinePoints) {
     const lats = polylinePoints.map(p => p[0]);
     const longs = polylinePoints.map(p => p[1]);
 
