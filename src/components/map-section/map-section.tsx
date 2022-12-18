@@ -3,6 +3,9 @@
 // necessary because of the usage of mismatching @types/react versions in lib and here
 
 import React from "react";
+
+import { env } from "../../env/client.mjs"
+
 import { Map, MapkitProvider, Marker } from 'react-mapkit'
 import type { PolylinePoints } from "./map-polyline";
 import { MapPolyline } from "./map-polyline";
@@ -31,16 +34,14 @@ export function MapSection(props: Props): React.ReactElement {
 
     const visibleRect = calculateVisibleRectFromPolyline(polylinePoints);
     return (
-        <>
-            <div className="h-96 w-11/12 lg:w-1/2 rounded-lg">
-                <MapkitProvider tokenOrCallback="eyJhbGciOiJFUzI1NiIsImtpZCI6IjlNNjZER1hCOEsiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiI0UlQ4NE05OU40IiwiaWF0IjoxNjY4NzE1MTM0Ljg4Njk3LCJleHAiOjE2NzIzMTUxMzQuODg2OTd9.qwbb-HxaG0VSLGs8ASi8Gd4g7Ol9qD_L4sCWxS955tpcmKY_du3XgKgSXGiLMj83DqF77lXFitgV9wPpLrYnCQ">
-                    <Map region={visibleRect} padding={12} >
-                        <MapPolyline polylinePoints={polylinePoints} style={{ lineWidth: 5, strokeColor: lineColorCode }} />
-                        <Marker latitude={currentLocation?.latitude} longitude={currentLocation?.longitude} />
-                    </Map>
-                </MapkitProvider>
-            </div >
-        </>
+        <div className="h-96 w-11/12 lg:w-1/2 rounded-lg">
+            <MapkitProvider tokenOrCallback={env.NEXT_PUBLIC_MAPKIT_TOKEN}>
+                <Map region={visibleRect} padding={12} >
+                    <MapPolyline polylinePoints={polylinePoints} style={{ lineWidth: 5, strokeColor: lineColorCode }} />
+                    <Marker latitude={currentLocation?.latitude} longitude={currentLocation?.longitude} />
+                </Map>
+            </MapkitProvider>
+        </div >
     );
 }
 
