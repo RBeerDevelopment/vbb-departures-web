@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import type { Departure } from "../server/trpc/models/departure";
-import { formatTime } from "../utils/format-time";
+import { formatTimeHHMM } from "../utils/format-time";
 import { DelayText } from "./delay-text";
 
 interface Props {
@@ -26,7 +26,7 @@ export function DepartureCard(props: Props): React.ReactElement {
             <div className="flex flex-col overflow-hidden">
                 <p className="font-thin text-lg overflow-hidden whitespace-nowrap text-ellipsis">{departure.direction}</p>
                 <div className="flex flex-row gap-3">
-                    <p className="font-bold text-md">{formatTime(departure.when)}</p>
+                    <p className="font-bold text-md">{formatTimeHHMM(departure.when)}</p>
                     <DelayText delay={departure.delay} />
                 </div>
             </div>

@@ -181,7 +181,7 @@ export function mapTripResponseToTrip(resp: TripResponse): Trip {
         departureDelay: resp.departureDelay,
         departurePlattform: resp.departurePlatform,
         destination: resp.destination.name,
-        arrival: resp.arrival,
+        arrival: new Date(resp.arrival),
         arrivalDelay: resp.arrivalDelay,
         arrivalPlattform: resp.arrivalPlatform,
         lineName: resp.line.name,

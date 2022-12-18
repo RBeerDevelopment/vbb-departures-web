@@ -44,7 +44,7 @@ const Departures: NextPage = () => {
 
     if (trip) {
         content = (
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-8 items-center">
                 <TripSection trip={trip} />
                 <MapSection
                     lineName={trip.lineName}
