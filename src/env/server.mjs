@@ -8,7 +8,7 @@ import { env as clientEnv, formatErrors } from "./client.mjs";
 
 const _serverEnv = serverSchema.safeParse(process.env);
 
-console.error({ "this is loggeddd")
+console.error({ env: process.env })
 console.error({ _serverEnv })
 if (!_serverEnv.success) {
   console.error(
@@ -26,4 +26,8 @@ for (let key of Object.keys(_serverEnv.data)) {
   }
 }
 
-export const env = { ..._serverEnv.data, ...clientEnv };
+export const env = {
+  // temporarly add this to check if edge functions work this way
+  "NODE_ENV": "production",
+  ..._serverEnv.data, ...clientEnv
+};
