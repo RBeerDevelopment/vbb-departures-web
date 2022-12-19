@@ -1,2 +1,2 @@
-type NumberTuple = [number, number]
-export type PolylinePoints = NumberTuple[]
+export type PolylinePoint = [number, number]
+export type PolylinePoints = PolylinePoint[]

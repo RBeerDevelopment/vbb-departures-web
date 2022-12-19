@@ -3,8 +3,6 @@ import React from 'react'
 import { MapContext } from 'react-mapkit'
 import type { PolylinePoints } from './polyline-points'
 
-
-
 type PolylineProps = {
     polylinePoints: PolylinePoints,
     style?: mapkit.Style
