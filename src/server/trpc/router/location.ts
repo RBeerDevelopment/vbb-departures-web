@@ -6,6 +6,8 @@ import { mapLocationResponseToLocation } from "../models/location";
 
 import { router, publicProcedure } from "../trpc";
 
+console.log("FROM ServerEnv: " + env.VBB_API_URL);
+console.log("FROM process.env: " + process.env.VBB_API_URL)
 export const locationRouter = router({
     byFuzzyName: publicProcedure
         .input(z.object({ query: z.string() }))
