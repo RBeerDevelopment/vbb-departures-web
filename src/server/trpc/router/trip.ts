@@ -11,6 +11,8 @@ export const tripRouter = router({
         .input(z.object({ tripId: z.string(), lineName: z.string() }))
         .query(async ({ input }) => {
 
+            console.time("tripRouter");
+
             const { tripId, lineName } = input;
 
             const apiUrl = new URL(env.VBB_API_URL + `trips/${encodeURIComponent(tripId)}`);
@@ -24,6 +26,8 @@ export const tripRouter = router({
             const resp = await axios.get<TripResponse>(apiUrl.toString());
 
             const data = mapTripResponseToTrip(resp.data);
+
+            console.timeEnd("tripRouter");
 
             return data;
         }),

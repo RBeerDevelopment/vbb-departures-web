@@ -11,6 +11,7 @@ export const departureRouter = router({
         .input(z.object({ stationId: z.string(), resultCount: z.number().default(15), duration: z.number().default(30) }))
         .query(async ({ input }) => {
 
+            console.time("departureRouter");
             const { stationId, resultCount, duration } = input;
 
             const apiUrl = new URL(env.VBB_API_URL + `stops/${stationId}/departures`);
@@ -27,6 +28,7 @@ export const departureRouter = router({
 
             const data = resp.data.map(mapDepartureResponseToDeparture);
 
+            console.timeEnd("departureRouter");
             return data;
         }),
 });
