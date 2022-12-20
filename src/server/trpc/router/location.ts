@@ -6,12 +6,12 @@ import { mapLocationResponseToLocation } from "../models/location";
 
 import { router, publicProcedure } from "../trpc";
 
-console.log("FROM ServerEnv: " + env.VBB_API_URL);
-console.log("FROM process.env: " + process.env.VBB_API_URL)
 export const locationRouter = router({
     byFuzzyName: publicProcedure
         .input(z.object({ query: z.string() }))
         .query(async ({ input }) => {
+
+            console.time("byFuzzyName");
 
             const apiUrl = new URL(env.VBB_API_URL + "locations");
 
@@ -26,6 +26,7 @@ export const locationRouter = router({
 
             const data = resp.data.map(mapLocationResponseToLocation);
 
+            console.timeEnd("byFuzzyName");
             return data;
         }),
     byLocation: publicProcedure
@@ -34,6 +35,8 @@ export const locationRouter = router({
             long: z.number().lte(180, "Must at below or equal to 180").gte(-180, "Must be larger or equal to -180"),
         }))
         .query(async ({ input }) => {
+
+            console.time("byLocation");
 
             const apiUrl = new URL(env.VBB_API_URL + "stops/nearby");
 
@@ -46,6 +49,8 @@ export const locationRouter = router({
             const resp = await axios.get<LocationResponse[]>(apiUrl.toString());
 
             const data = resp.data.map(mapLocationResponseToLocation);
+
+            console.timeEnd("byLocation");
 
             return data;
         }),
