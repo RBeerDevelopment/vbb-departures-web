@@ -27,7 +27,7 @@ const Departures: NextPage = () => {
 
     if (departures && departures.length > 0) {
         content = departures.map(d => (
-            <DepartureCard key={d.id} departure={d} />
+            <DepartureCard key={d.id} departure={d} stationId={String(stationId)} />
         ))
     }
 

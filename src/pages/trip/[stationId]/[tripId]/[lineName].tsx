@@ -3,32 +3,36 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import type { ReactNode } from "react";
 import React from "react";
-import { LoadingIndicator } from "../../../components/loading-indicators/loading-indicator";
-import { NavBar } from "../../../components/nav-bar";
-import type { PolylinePoints } from "../../../components/map-section";
-import { MapSection } from "../../../components/map-section";
-import { TripSection } from "../../../components/trip-sections/trip-section";
+import { LoadingIndicator } from "../../../../components/loading-indicators/loading-indicator";
+import { NavBar } from "../../../../components/nav-bar";
+import type { PolylinePoints } from "../../../../components/map-section";
+import { MapSection } from "../../../../components/map-section";
+import { TripSection } from "../../../../components/trip-sections/trip-section";
 
-import { trpc } from "../../../utils/trpc";
-import { useCurrentRefetchFns } from "../../../components/refresh-button";
+import { trpc } from "../../../../utils/trpc";
+import { useCurrentRefetchFns } from "../../../../components/refresh-button";
 
 const refetchInterval = 15 * 1000 // 15 sec
 const Departures: NextPage = () => {
 
     const router = useRouter()
-    const { tripId, lineName } = router.query
+    const { stationId, tripId, lineName } = router.query
 
+    console.log({ stationId })
 
     const { data: trip, isLoading, refetch } = trpc.trip.byTripId.useQuery(
         {
             tripId: tripId as string || "",
-            lineName: lineName as string || ""
+            lineName: lineName as string || "",
+            stopovers: true
         },
         {
             refetchInterval: refetchInterval,
             enabled: Boolean(tripId) && Boolean(lineName)
         }
     );
+
+    console.log({ trip })
 
     useCurrentRefetchFns([refetch]);
 
@@ -49,11 +53,12 @@ const Departures: NextPage = () => {
         content = (
             <div className="flex flex-col gap-8 items-center w-screen">
                 <TripSection trip={trip} polylinePoints={linePolyline} />
-                <MapSection
+                {trip.polyline && <MapSection
                     lineName={trip.lineName}
                     polylinePoints={linePolyline}
                     currentLocation={trip.currentLocation}
-                />
+                />}
+                {}
             </div>);
     }
 
@@ -66,7 +71,7 @@ const Departures: NextPage = () => {
 
             <main className="w-full mx-auto flex h-screen flex-col justify-center bg-slate-300">
                 <NavBar />
-                <div className="overflow-y-scroll w-full flex flex-col mx-auto items-center py-16">
+                <div className="overflow-y-scroll w-full flex flex-col mx-auto items-center py-4 lg:py-16">
                     {content}
                 </div>
             </main>

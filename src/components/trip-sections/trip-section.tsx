@@ -19,7 +19,7 @@ export function TripSection(props: Props): React.ReactElement {
     const tripProgress = calculateTripProgress(polylinePoints || [], currentLocationPolylinePoint);
 
     return (
-        <div className="flex flex-col items-start bg-white w-11/12 lg:w-1/2 min-h-min rounded-md my-4 p-4">
+        <div className="flex flex-col items-start bg-white w-11/12 lg:w-1/2 min-h-min rounded-md my-2 md:my-4 p-4">
             <h2 className={`text-2xl font-medium text-${trip.lineName.toLowerCase()}`}>{trip.lineName} ({trip.direction})</h2>
             <div className="w-full flex flex-col items-center py-4">
                 <div className="w-full flex justify-between items-center font-light text-sm px-2 py-2">
