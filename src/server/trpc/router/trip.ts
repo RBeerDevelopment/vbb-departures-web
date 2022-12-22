@@ -1,6 +1,6 @@
 import axios from "axios";
 import { z } from "zod";
-import { env } from "../../../env/server.mjs";
+import { env } from "@env/server.mjs";
 
 import { router, publicProcedure } from "../trpc";
 import type { TripResponse } from "../models/trip";
@@ -29,8 +29,6 @@ export const tripRouter = router({
             const resp = await axios.get<TripResponse>(apiUrl.toString());
 
             const data = mapTripResponseToTrip(resp.data);
-
-            console.log(apiUrl.toString())
 
             return data;
         }),

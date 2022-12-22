@@ -3,14 +3,15 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import type { ReactNode } from "react";
 import React from "react";
-import { LoadingIndicator } from "../../../../components/loading-indicators/loading-indicator";
-import { NavBar } from "../../../../components/nav-bar";
-import type { PolylinePoints } from "../../../../components/map-section";
-import { MapSection } from "../../../../components/map-section";
-import { TripSection } from "../../../../components/trip-sections/trip-section";
+import { LoadingIndicator } from "@components/loading-indicators/loading-indicator";
+import { NavBar } from "@components/nav-bar";
+import type { PolylinePoints } from "@components/map-section";
+import { MapSection } from "@components/map-section";
+import { TripSection } from "@components/trip-sections/trip-section";
 
-import { trpc } from "../../../../utils/trpc";
-import { useCurrentRefetchFns } from "../../../../components/refresh-button";
+import { trpc } from "@utils/trpc";
+import { useCurrentRefetchFns } from "@components/refresh-button";
+import { StationDetailSection } from "@components/station-detail-section";
 
 const refetchInterval = 15 * 1000 // 15 sec
 const Departures: NextPage = () => {
@@ -18,21 +19,19 @@ const Departures: NextPage = () => {
     const router = useRouter()
     const { stationId, tripId, lineName } = router.query
 
-    console.log({ stationId })
 
     const { data: trip, isLoading, refetch } = trpc.trip.byTripId.useQuery(
         {
             tripId: tripId as string || "",
             lineName: lineName as string || "",
-            stopovers: true
+            stopovers: true,
+            polyline: true
         },
         {
             refetchInterval: refetchInterval,
             enabled: Boolean(tripId) && Boolean(lineName)
         }
     );
-
-    console.log({ trip })
 
     useCurrentRefetchFns([refetch]);
 
@@ -48,17 +47,16 @@ const Departures: NextPage = () => {
         content = <LoadingIndicator />
     }
 
-
     if (trip) {
         content = (
-            <div className="flex flex-col gap-8 items-center w-screen">
+            <div className="flex flex-col gap-4 items-center w-screen">
                 <TripSection trip={trip} polylinePoints={linePolyline} />
+                {trip.stopovers && <StationDetailSection trip={trip} stationId={String(stationId)} />}
                 {trip.polyline && <MapSection
                     lineName={trip.lineName}
                     polylinePoints={linePolyline}
                     currentLocation={trip.currentLocation}
                 />}
-                {}
             </div>);
     }
 

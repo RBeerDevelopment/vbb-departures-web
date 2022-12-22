@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import type { LocationModel } from "../server/trpc/models/location"
+import type { LocationModel } from "@server/trpc/models/location"
 import { ProductRow } from "./product-row";
 
 interface Props {

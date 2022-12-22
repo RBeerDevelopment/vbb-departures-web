@@ -3,12 +3,12 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import type { ReactNode } from "react";
 import React from "react";
-import { DepartureCard } from "../../components/departure-card";
-import { LoadingIndicator } from "../../components/loading-indicators/loading-indicator";
-import { NavBar } from "../../components/nav-bar";
-import { useCurrentRefetchFns } from "../../components/refresh-button";
+import { DepartureCard } from "@components/departure-card";
+import { LoadingIndicator } from "@components/loading-indicators/loading-indicator";
+import { NavBar } from "@components/nav-bar";
+import { useCurrentRefetchFns } from "@components/refresh-button";
 
-import { trpc } from "../../utils/trpc";
+import { trpc } from "@utils/trpc";
 
 const Departures: NextPage = () => {
 

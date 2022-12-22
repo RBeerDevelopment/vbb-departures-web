@@ -4,16 +4,16 @@
 
 import React from "react";
 
-import { env } from "../../env/client.mjs"
+import { env } from "@env/client.mjs"
 
-import { Map, MapkitProvider, Marker } from 'react-mapkit'
+import { Map, MapkitProvider } from 'react-mapkit'
 import type { PolylinePoints } from "./map-polyline";
 import { MapPolyline } from "./map-polyline";
 import type { MapLocation } from "./map-location";
 
 import resolveConfig from 'tailwindcss/resolveConfig'
 import tailwindConfig from "../../../tailwind.config.cjs"
-import { findIndexOfClosestPoint } from "../../utils/coordinates";
+import { findIndexOfClosestPoint } from "@utils/coordinates";
 
 const tailwindConfigObj = resolveConfig(tailwindConfig)
 

@@ -1,5 +1,5 @@
 import React from "react";
-import type { Products } from "../server/trpc/models/location";
+import type { Products } from "@server/trpc/models/location";
 
 interface Props {
     products: Products
