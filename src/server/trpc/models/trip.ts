@@ -198,7 +198,8 @@ export interface Trip {
     stopovers?: Stopover[]
 }
 
-interface Stopover {
+export interface Stopover {
+    id: string
     stopName: string;
     arrival?: Date;
     plannedArrival?: Date;
@@ -211,8 +212,6 @@ interface Stopover {
 }
 
 export function mapTripResponseToTrip(resp: TripResponse): Trip {
-
-    console.log(resp.stopovers)
     return {
         id: resp.id,
         originName: resp.origin.name,
@@ -234,10 +233,11 @@ export function mapTripResponseToTrip(resp: TripResponse): Trip {
 
 function mapStopoverResponseToStopover(resp: StopoverResponse): Stopover {
     return {
+        id: resp.stop.id,
         stopName: resp.stop.name,
         arrival: resp.arrival ? new Date(resp.arrival) : undefined,
         plannedArrival: resp.plannedArrival ? new Date(resp.plannedArrival) : undefined,
-        arrivalDelay: resp.arrivalDelay, 
+        arrivalDelay: resp.arrivalDelay,
         platform: resp.arrivalPlatform,
         plannedPlatform: resp.plannedArrivalPlatform,
         departure: resp.departure ? new Date(resp.departure) : undefined,

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { z } from "zod";
-import { env } from "../../../env/server.mjs";
+import { env } from "@env/server.mjs";
 import type { LocationResponse } from "../models/location";
 import { mapLocationResponseToLocation } from "../models/location";
 

@@ -11,7 +11,7 @@ import { TripSection } from "@components/trip-sections/trip-section";
 
 import { trpc } from "@utils/trpc";
 import { useCurrentRefetchFns } from "@components/refresh-button";
-import { StationDetailSection } from "@components/station-detail-section";
+import { TripDetailSection } from "@components/trip-detail-section";
 
 const refetchInterval = 15 * 1000 // 15 sec
 const Departures: NextPage = () => {
@@ -49,9 +49,9 @@ const Departures: NextPage = () => {
 
     if (trip) {
         content = (
-            <div className="flex flex-col gap-4 items-center w-screen">
+            <div className="flex flex-col mt-12 md:mt-8 lg:mt-4 gap-2 md:gap-4 items-center w-screen">
                 <TripSection trip={trip} polylinePoints={linePolyline} />
-                {trip.stopovers && <StationDetailSection trip={trip} stationId={String(stationId)} />}
+                {trip.stopovers && <TripDetailSection trip={trip} stationId={String(stationId)} />}
                 {trip.polyline && <MapSection
                     lineName={trip.lineName}
                     polylinePoints={linePolyline}
