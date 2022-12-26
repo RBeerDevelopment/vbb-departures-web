@@ -1,4 +1,4 @@
-import type { LegacyRef} from "react";
+import type { LegacyRef } from "react";
 import React, { useState } from "react";
 import type { Stopover, Trip } from "@server/trpc/models/trip";
 import { DetailCard } from "@components/detail-card";
@@ -36,8 +36,32 @@ export function TripDetailSection(props: Props): React.ReactElement {
     let content: React.ReactNode = <SingleStationDetail selectedStation={selectedStation} />;
 
     if(expanded) {
-        // todo find better way to calculate current station
-        content = trip.stopovers.map(s => <div key={s.id}><SimpleStopOverview bgColor={bgColor} stop={s} stopState={calcualteStopState(s)} /></div>);
+        let currentStopIndex = trip.stopovers.findIndex(stop => {
+            return isArrivalNow(stop);
+        });
+        if(currentStopIndex < 0) {
+            currentStopIndex = trip.stopovers.findIndex(stop => {
+                return isArrivalInPast(stop) && !isDepartureInPast(stop);
+            });
+        }
+        if(currentStopIndex < 0) {
+            // if no station index could be found until now, 
+            // the station has to be the one before the first one that hasn't been reacht yet
+            currentStopIndex = trip.stopovers.findIndex(stop => {
+                return !isArrivalInPast(stop);
+            });
+            currentStopIndex -= 1;
+        }
+        
+        content = trip.stopovers.map((s, idx) => {
+            let stopState: StopState = StopState.Future;
+            if(idx < currentStopIndex) stopState = StopState.Past;
+            else if(idx === currentStopIndex) stopState = StopState.Current;
+
+            return (<div key={s.id}>
+                <SimpleStopOverview bgColor={bgColor} stop={s} stopState={stopState} isSelectedStation={s.id === stationId} />
+            </div>);
+        });
     }
 
     return (
@@ -53,16 +77,6 @@ export function TripDetailSection(props: Props): React.ReactElement {
     );
 }
 
-function calcualteStopState(stop: Stopover): StopState {
-
-    const arrivalInPast = isArrivalInPast(stop);
-
-    if(arrivalInPast) return StopState.Past;
-    if((arrivalInPast && !isDepartureInPast(stop)) || isArrivalNow(stop)) return StopState.Current;
-    
-    return StopState.Future;
-
-}
 
 function isDepartureInPast(stop: Stopover): boolean {
     // check if this is a useful default
