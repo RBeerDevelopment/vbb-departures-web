@@ -11,6 +11,7 @@ export function SingleStationDetail(props: Props): React.ReactElement {
     const { selectedStation } = props;
     return (
         <table className="border-spacing-x-2 border-separate">
+            <tbody>
                 {selectedStation.arrival && 
                     
                     <tr>
@@ -24,10 +25,11 @@ export function SingleStationDetail(props: Props): React.ReactElement {
                         <TimeWithDelay time={selectedStation.departure} delay={selectedStation.departureDelay} />
                     </tr>
                 }
-                    <tr>
-                        <td className="font-bold text-md">Plattform: </td>
-                        <td className="text-md">{selectedStation.platform ? selectedStation.plannedPlatform : "-"}</td>
-                    </tr>
-            </table>
+                <tr>
+                    <td className="font-bold text-md">Plattform: </td>
+                    <td className="text-md">{selectedStation.platform ? selectedStation.plannedPlatform : "-"}</td>
+                </tr>
+            </tbody>
+        </table>
     );
 }

@@ -1,12 +1,13 @@
 import type { LegacyRef} from "react";
 import React, { useState } from "react";
-import type { Trip } from "@server/trpc/models/trip";
+import type { Stopover, Trip } from "@server/trpc/models/trip";
 import { DetailCard } from "@components/detail-card";
 import { SingleStationDetail } from "./single-station-detail";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { SimpleStopOverview } from "@components/stop-overview";
 import { StopState } from "@components/stop-overview/stop-state";
 import { ExpandIcon } from "@components/expand-icon";
+import { nowWithoutSeconds } from "@utils/now-without-seconds";
 
 interface Props {
     trip: Trip
@@ -33,7 +34,8 @@ export function TripDetailSection(props: Props): React.ReactElement {
     let content: React.ReactNode = <SingleStationDetail selectedStation={selectedStation} />
 
     if(expanded) {
-        content = trip.stopovers.map(s => <div key={s.id} className="my-2"><SimpleStopOverview stop={s} stopState={StopState.Current} /></div>)
+        // todo find better way to calculate current station
+        content = trip.stopovers.map(s => <div key={s.id}><SimpleStopOverview stop={s} stopState={calcualteStopState(s)} /></div>)
     }
 
     return (
@@ -47,4 +49,39 @@ export function TripDetailSection(props: Props): React.ReactElement {
             </div>
         </DetailCard>
     );
+}
+
+function calcualteStopState(stop: Stopover): StopState {
+
+    const arrivalInPast = isArrivalInPast(stop);
+
+    if(arrivalInPast) return StopState.Past;
+    if((arrivalInPast && !isDepartureInPast(stop)) || isArrivalNow(stop)) return StopState.Current;
+    
+    return StopState.Future;
+
+}
+
+function isDepartureInPast(stop: Stopover): boolean {
+    // check if this is a useful default
+    if(!stop.departure) return false;
+    
+    const now = nowWithoutSeconds().getTime(); 
+    return (stop.departure?.getTime() - now) < 0;
+}
+
+function isArrivalNow(stop: Stopover): boolean {
+    // check if this is a useful default
+    if(!stop.arrival) return false;
+
+    const now = nowWithoutSeconds().getTime(); 
+    return (stop.arrival?.getTime() - now) === 0;
+}
+
+function isArrivalInPast(stop: Stopover): boolean {
+    // check if this is a useful default
+    if(!stop.arrival) return false;
+
+    const now = nowWithoutSeconds().getTime(); 
+    return (stop.arrival?.getTime() - now) < 0;
 }
