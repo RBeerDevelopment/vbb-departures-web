@@ -42,15 +42,15 @@ declare namespace mapkit {
     /**
      * A language ID indicating the selected language.
      */
-    let language: string
+    let language: string;
     /**
      * The build string.
      */
-    const build: string
+    const build: string;
     /**
      * The version of MapKit JS.
      */
-    const version: string
+    const version: string;
 
     /**
      * Initialization options for MapKit JS.
@@ -86,7 +86,7 @@ declare namespace mapkit {
          * A constant indicating that the feature is always visible.
          */
         readonly Visible: string
-    }
+    };
 
     type InitializationEventType = 'configuration-change' | 'error'
 
@@ -139,36 +139,36 @@ declare namespace mapkit {
         /**
          * The map's DOM element.
          */
-        readonly element: Element
+        readonly element: Element;
 
         // Accessing Interaction Properties
 
         /**
          * A Boolean value that indicates if map rotation is available.
          */
-        isRotationAvailable: boolean
+        isRotationAvailable: boolean;
         /**
          * A Boolean value that determines whether the user may rotate the map using
          * the compass control or a rotate gesture.
          */
-        isRotationEnabled: boolean
+        isRotationEnabled: boolean;
         /**
          * A Boolean value that determines whether the user may scroll the map with
          * a pointing device or with gestures on a touchscreen.
          */
-        isScrollEnabled: boolean
+        isScrollEnabled: boolean;
         /**
          * A Boolean value that determines whether the user may zoom in and out on
          * the map using pinch gestures or the zoom control.
          */
-        isZoomEnabled: boolean
+        isZoomEnabled: boolean;
 
         // Manipulating the Visible Portion of the Map
 
         /**
          * The map coordinate at the center of the map view.
          */
-        center: Coordinate
+        center: Coordinate;
         /**
          * Centers the map to the provided coordinate, with optional animation.
          */
@@ -176,7 +176,7 @@ declare namespace mapkit {
         /**
          * The area currently displayed by the map.
          */
-        region: CoordinateRegion
+        region: CoordinateRegion;
         /**
          * Changes the map's region to the region provided, with optional animation.
          */
@@ -184,7 +184,7 @@ declare namespace mapkit {
         /**
          * The map's rotation, in degrees.
          */
-        rotation: number
+        rotation: number;
         /**
          * Changes the map's rotation setting to the number of degrees specified.
          */
@@ -192,7 +192,7 @@ declare namespace mapkit {
         /**
          * The visible area of the map defined in map units.
          */
-        visibleMapRect: MapRect
+        visibleMapRect: MapRect;
         /**
          * Changes the map's visible map rectangle to the specified map rectangle.
          */
@@ -212,7 +212,7 @@ declare namespace mapkit {
              * A constant indicating a dark color scheme.
              */
             readonly Dark: string
-        }
+        };
         /**
          * Constants representing the type of map to display.
          */
@@ -234,7 +234,7 @@ declare namespace mapkit {
              * A satellite image of the area.
              */
             readonly Satellite: string
-        }
+        };
         /**
          * Constants indicating the system of measurement displayed on the map.
          */
@@ -252,53 +252,53 @@ declare namespace mapkit {
              * A constant indicating the measurement system is metric.
              */
             readonly Metric: string
-        }
+        };
         /**
          * The map’s color scheme when displaying standard or muted standard map types.
          */
-        colorScheme: string
+        colorScheme: string;
         /**
          * The system of measurement displayed on the map.
          */
-        distances: string
+        distances: string;
         /**
          * The type of data displayed by the map view.
          */
-        mapType: string
+        mapType: string;
         /**
          * The map's inset margins.
          */
-        padding: Padding
+        padding: Padding;
         /**
          * A feature visibility setting that determines when the compass is visible.
          */
-        showsCompass: string
+        showsCompass: string;
         /**
          * A Boolean value that determines whether to display a control that lets
          * users choose the map type.
          */
-        showsMapTypeControl: boolean
+        showsMapTypeControl: boolean;
         /**
          * A Boolean value that determines whether to display a control for zooming
          * in and zooming out on a map.
          */
-        showsZoomControl: boolean
+        showsZoomControl: boolean;
         /**
          * A Boolean value that determines whether the user location control is visible.
          */
-        showsUserLocationControl: boolean
+        showsUserLocationControl: boolean;
         /**
          * A Boolean value that determines whether the map displays points of interest.
          */
-        showsPointsOfInterest: boolean
+        showsPointsOfInterest: boolean;
         /**
          * A feature visibility setting that determines when the map's scale is displayed.
          */
-        showsScale: string
+        showsScale: string;
         /**
          * The CSS color that is used to paint the user interface controls on the map.
          */
-        tintColor: string
+        tintColor: string;
         /**
          * Adjusts the maps visible region to bring the specified overlays and
          * annotations into view.
@@ -313,11 +313,11 @@ declare namespace mapkit {
         /**
          * An array of all the annotations on the map.
          */
-        annotations: Annotation[]
+        annotations: Annotation[];
         /**
          * The annotation that is selected.
          */
-        selectedAnnotation: Annotation | null
+        selectedAnnotation: Annotation | null;
         /**
          * A delegate method for modifying an annotation that represents a group of
          * annotations that are combined into a cluster.
@@ -350,11 +350,11 @@ declare namespace mapkit {
         /**
          * An array of all of the map's overlays.
          */
-        overlays: Overlay[]
+        overlays: Overlay[];
         /**
          * The overlay on the map that is selected.
          */
-        selectedOverlay: Overlay | null
+        selectedOverlay: Overlay | null;
         /**
          * Returns an array of overlays at a given point on the webpage.
          */
@@ -385,7 +385,7 @@ declare namespace mapkit {
         /**
          * An array of all of the map's tile overlays.
          */
-        tileOverlays: TileOverlay[]
+        tileOverlays: TileOverlay[];
         /**
          * Adds a tile overlay to the map.
          */
@@ -409,16 +409,16 @@ declare namespace mapkit {
          * A Boolean value that determines whether to show the user's location on
          * the map.
          */
-        showsUserLocation: boolean
+        showsUserLocation: boolean;
         /**
          * A Boolean value that determines whether to center the map on the user's
          * location.
          */
-        tracksUserLocation: boolean
+        tracksUserLocation: boolean;
         /**
          * An annotation that indicates the user's location on the map.
          */
-        readonly userLocationAnnotation: Annotation | null
+        readonly userLocationAnnotation: Annotation | null;
 
         // Converting Map Coordinates
 
@@ -546,7 +546,7 @@ declare namespace mapkit {
      * An array to which maps are automatically added and removed as they are
      * initialized and destroyed.
      */
-    const maps: Map[]
+    const maps: Map[];
 
     interface EventBase<T> {
         type: string
@@ -617,35 +617,35 @@ declare namespace mapkit {
         /**
          * The origin point of a rectangle.
          */
-        origin: MapPoint
+        origin: MapPoint;
         /**
          * The width and height of a rectangle, starting from the origin point.
          */
-        size: MapSize
+        size: MapSize;
         /**
          * The maximum x-axis value of a rectangle.
          */
-        maxX: number
+        maxX: number;
         /**
          * The maximum y-axis value of a rectangle.
          */
-        maxY: number
+        maxY: number;
         /**
          * The mid-point along the x-axis of a rectangle.
          */
-        midX: number
+        midX: number;
         /**
          * The mid-point along the y-axis of a rectangle.
          */
-        midY: number
+        midY: number;
         /**
          * The minimum x-axis value of a rectangle.
          */
-        minX: number
+        minX: number;
         /**
          * The minimum y-axis value of a rectangle.
          */
-        minY: number
+        minY: number;
         /**
          * Returns a copy of a map rectangle.
          */
@@ -684,11 +684,11 @@ declare namespace mapkit {
         /**
          * The center point of the region.
          */
-        center: Coordinate
+        center: Coordinate;
         /**
          * The horizontal and vertical span representing the amount of map to display.
          */
-        span: CoordinateSpan
+        span: CoordinateSpan;
         /**
          * Returns a copy of the calling coordinate region.
          */
@@ -719,11 +719,11 @@ declare namespace mapkit {
         /**
          * The latitude in degrees.
          */
-        latitude: number
+        latitude: number;
         /**
          * The longitude in degrees.
          */
-        longitude: number
+        longitude: number;
         /**
          * Returns a copy of the coordinate.
          */
@@ -768,19 +768,19 @@ declare namespace mapkit {
         /**
          * The amount of padding, in CSS pixels, to inset the map from the bottom edge.
          */
-        bottom: number
+        bottom: number;
         /**
          * The amount of padding, in CSS pixels, to inset the map from the left edge.
          */
-        left: number
+        left: number;
         /**
          * The amount of padding, in CSS pixels, to inset the map from the right edge.
          */
-        right: number
+        right: number;
         /**
          * The amount of padding, in CSS pixels, to inset the map from the top edge.
          */
-        top: number
+        top: number;
     }
 
     interface PaddingConstructorOptions {
@@ -859,7 +859,7 @@ declare namespace mapkit {
             readonly Low: number
             readonly High: number
             readonly Required: number
-        }
+        };
         /**
          * Constants indicating how to interpret the collision frame rectangle of
          * an annotation view.
@@ -867,93 +867,93 @@ declare namespace mapkit {
         static readonly CollisionMode: {
             readonly Rectangle: string
             readonly Circle: string
-        }
+        };
         /**
          * The annotation's coordinate.
          */
-        coordinate: Coordinate
+        coordinate: Coordinate;
         /**
          * The map to which the annotation was added.
          */
-        readonly map: Map | null
+        readonly map: Map | null;
         /**
          * The annotation's element in the DOM.
          */
-        readonly element: Element
+        readonly element: Element;
         /**
          * Data that you define that is assigned to the annotation.
          */
-        data: any
+        data: any;
         /**
          * The text to display in the annotation's callout.
          */
-        title: string
+        title: string;
         /**
          * The text to display as a subtitle, on the second line of an annotation's
          * callout.
          */
-        subtitle: string
+        subtitle: string;
         /**
          * An offset that changes the annotation's default anchor point.
          */
-        anchorOffset: DOMPoint
+        anchorOffset: DOMPoint;
         /**
          * A CSS animation that runs when the annotation appears on the map.
          */
-        appearanceAnimation: string
+        appearanceAnimation: string;
         /**
          * A numeric hint the map uses to prioritize displaying annotations.
          */
-        displayPriority: number
+        displayPriority: number;
         /**
          * The desired dimensions of the annotation, in CSS pixels.
          */
-        size: { width: number; height: number }
+        size: { width: number; height: number };
         /**
          * A Boolean value that determines if the annotation is visible or hidden.
          */
-        visible: boolean
+        visible: boolean;
         /**
          * A Boolean value that determines if the annotation should be animated.
          */
-        animates: boolean
+        animates: boolean;
         /**
          * A Boolean value that determines whether the user can drag the annotation.
          */
-        draggable: boolean
+        draggable: boolean;
         /**
          * A Boolean value that determines whether the annotation is selected.
          */
-        selected: boolean
+        selected: boolean;
         /**
          * A Boolean value that determines whether the annotation responds to user
          * interaction.
          */
-        enabled: boolean
+        enabled: boolean;
         /**
          * A delegate that enables you to customize the annotation's callout.
          */
-        callout: AnnotationCalloutDelegate
+        callout: AnnotationCalloutDelegate;
         /**
          * An offset that changes the annotation callout's default placement.
          */
-        calloutOffset: DOMPoint
+        calloutOffset: DOMPoint;
         /**
          * A Boolean value that determines whether a callout should be shown.
          */
-        calloutEnabled: boolean
+        calloutEnabled: boolean;
         /**
          * An array of annotations that are grouped together in a cluster.
          */
-        memberAnnotations: Annotation[]
+        memberAnnotations: Annotation[];
         /**
          * An identifer used for grouping annotations into the same cluster.
          */
-        clusteringIdentifier: string | null
+        clusteringIdentifier: string | null;
         /**
          * A mode that determines the shape of the collision frame.
          */
-        collisionMode: string
+        collisionMode: string;
     }
 
     /**
@@ -1124,31 +1124,31 @@ declare namespace mapkit {
         /**
          * A value that determines the behavior of the subtitle's visibility.
          */
-        subtitleVisibility: string
+        subtitleVisibility: string;
         /**
          * A value that determines the behavior of the title's visibility.
          */
-        titleVisibility: string
+        titleVisibility: string;
         /**
          * The background color of the balloon.
          */
-        color: string
+        color: string;
         /**
          * The fill color of the glyph.
          */
-        glyphColor: string
+        glyphColor: string;
         /**
          * The text to display in the marker balloon.
          */
-        glyphText: string
+        glyphText: string;
         /**
          * The image to display in the marker balloon.
          */
-        glyphImage: object | null
+        glyphImage: object | null;
         /**
          * The image to display in the balloon when the marker is selected.
          */
-        selectedGlyphImage: object
+        selectedGlyphImage: object;
     }
 
     /**
@@ -1221,27 +1221,27 @@ declare namespace mapkit {
         /**
          * Custom data to associate with this overlay.
          */
-        data: object
+        data: object;
         /**
          * A Boolean value that determines if an overlay is visible.
          */
-        visible: boolean
+        visible: boolean;
         /**
          * A Boolean value that determines whether the overlay responds to user interaction.
          */
-        enabled: boolean
+        enabled: boolean;
         /**
          * A Boolean value that indicates whether the overlay is selected.
          */
-        selected: boolean
+        selected: boolean;
         /**
          * Style properties to apply to the overlay.
          */
-        style: Style
+        style: Style;
         /**
          * The map to which the overlay is added.
          */
-        readonly map: Map | null
+        readonly map: Map | null;
     }
 
     /**
@@ -1265,11 +1265,11 @@ declare namespace mapkit {
         /**
          * The coordinate of the circle overlay's center.
          */
-        coordinate: Coordinate
+        coordinate: Coordinate;
         /**
          * The circle overlay's radius in meters.
          */
-        radius: number
+        radius: number;
     }
 
     /**
@@ -1287,7 +1287,7 @@ declare namespace mapkit {
         /**
          * An array of coordinate points that define the polyline overlay's shape.
          */
-        points: Coordinate[]
+        points: Coordinate[];
     }
 
     /**
@@ -1307,7 +1307,7 @@ declare namespace mapkit {
         /**
          * One or more arrays of coordinates that define the polygon overlay shape.
          */
-        points: Coordinate[]
+        points: Coordinate[];
     }
 
     interface OverlayOptions {
@@ -1357,12 +1357,12 @@ declare namespace mapkit {
          * The amount of north-to-south distance (measured in degrees) to display on
          * the map.
          */
-        latitudeDelta: number
+        latitudeDelta: number;
         /**
          * The amount of east-to-west distance (measured in degrees) to display for
          * the map region.
          */
-        longitudeDelta: number
+        longitudeDelta: number;
         /**
          * Returns a copy of the coordinate span.
          */
@@ -1388,7 +1388,7 @@ declare namespace mapkit {
          * A string, or callback function that returns a string, with a URL that
          * provides the requested tile.
          */
-        urlTemplate: string | URLTemplateCallback
+        urlTemplate: string | URLTemplateCallback;
         /**
          * Reloads the tile overlay for the displayed map region with the latest
          * data values.
@@ -1397,19 +1397,19 @@ declare namespace mapkit {
         /**
          * Minimum zoom level of the overlay.
          */
-        minimumZ: number
+        minimumZ: number;
         /**
          * Maximum zoom level of the overlay.
          */
-        maximumZ: number
+        maximumZ: number;
         /**
          * Opacity level of the overlay.
          */
-        opacity: number
+        opacity: number;
         /**
          * Custom data used to populate the URL template.
          */
-        data: object
+        data: object;
     }
 
     /**
@@ -1455,43 +1455,43 @@ declare namespace mapkit {
         /**
          * The fill color of a shape.
          */
-        fillColor: string
+        fillColor: string;
         /**
          * The opacity of the fill color.
          */
-        fillOpacity: number
+        fillOpacity: number;
         /**
          * A rule for determining whether a point is inside or outside a polygon.
          */
-        fillRule: string
+        fillRule: string;
         /**
          * The style to use when drawing line endings.
          */
-        lineCap: string
+        lineCap: string;
         /**
          * An array of line and gap lengths, used to create a dashed line.
          */
-        lineDash: number[]
+        lineDash: number[];
         /**
          * The number of CSS pixels to offset drawing of a line's dash pattern.
          */
-        lineDashOffset: number
+        lineDashOffset: number;
         /**
          * The style to use when drawing joins between line segments.
          */
-        lineJoin: string
+        lineJoin: string;
         /**
          * The width of a line's stroke, in CSS pixels.
          */
-        lineWidth: number
+        lineWidth: number;
         /**
          * The stroke color of a line.
          */
-        strokeColor: string
+        strokeColor: string;
         /**
          * The opacity of the stroke color.
          */
-        strokeOpacity: number
+        strokeOpacity: number;
     }
 
     /**
@@ -1582,12 +1582,12 @@ declare namespace mapkit {
          * A Boolean value that indicates whether the geocoder should return results
          * near the user's current location.
          */
-        language: string
+        language: string;
         /**
          * A Boolean value that indicates whether the geocoder should return results
          * near the user's current location.
          */
-        getsUserLocation: string
+        getsUserLocation: string;
     }
 
     /**
@@ -1891,7 +1891,7 @@ declare namespace mapkit {
              * A constant identifying the mode of transportation as walking.
              */
             readonly Walking: string
-        }
+        };
     }
 
     /**
@@ -2007,11 +2007,11 @@ declare namespace mapkit {
         /**
          * The location of the point along the x-axis of the map.
          */
-        x: number
+        x: number;
         /**
          * The location of the point along the y-axis of the map.
          */
-        y: number
+        y: number;
         /**
          * Returns a copy of a map point.
          */
@@ -2046,11 +2046,11 @@ declare namespace mapkit {
         /**
          * The height value, in map point units.
          */
-        height: number
+        height: number;
         /**
          * The width value, in map point units.
          */
-        width: number
+        width: number;
         /**
          * Returns a copy of a map size.
          */
@@ -2086,19 +2086,19 @@ declare namespace mapkit {
         /**
          * The east longitude of the bounding region.
          */
-        eastLongitude: number
+        eastLongitude: number;
         /**
          * The north latitude of the bounding region.
          */
-        northLatitude: number
+        northLatitude: number;
         /**
          * The south latitude of the bounding region.
          */
-        southLatitude: number
+        southLatitude: number;
         /**
          * The west longitude of the bounding region.
          */
-        westLongitude: number
+        westLongitude: number;
         /**
          * Returns a copy of the calling bounding region.
          */

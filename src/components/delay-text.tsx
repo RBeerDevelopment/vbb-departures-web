@@ -15,7 +15,7 @@ export function DelayText(props: Props): React.ReactElement {
     
     if (delay > 0) {
         color = "text-red-800";
-        delayStr = "+" + delay;
+        delayStr = `+${  delay}`;
     }
     else if (delay < 0) color = "text-green-800";
 

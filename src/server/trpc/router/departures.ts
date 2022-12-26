@@ -13,7 +13,7 @@ export const departureRouter = router({
 
             const { stationId, resultCount, duration } = input;
 
-            const apiUrl = new URL(env.VBB_API_URL + `stops/${stationId}/departures`);
+            const apiUrl = new URL(`${env.VBB_API_URL}stops/${stationId}/departures`);
 
             apiUrl.searchParams.append("results", String(resultCount));
             apiUrl.searchParams.append("duration", String(duration));

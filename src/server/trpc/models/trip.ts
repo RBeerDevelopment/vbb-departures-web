@@ -228,7 +228,7 @@ export function mapTripResponseToTrip(resp: TripResponse): Trip {
         updatedAt: resp.realtimeDataUpdatedAt,
         polyline: resp.polyline,
         stopovers: resp.stopovers ? resp.stopovers.map(mapStopoverResponseToStopover) : undefined
-    }
+    };
 }
 
 function mapStopoverResponseToStopover(resp: StopoverResponse): Stopover {
@@ -243,5 +243,5 @@ function mapStopoverResponseToStopover(resp: StopoverResponse): Stopover {
         departure: resp.departure ? new Date(resp.departure) : undefined,
         plannedDeparture: resp.plannedDeparture ? new Date(resp.plannedDeparture) : undefined,
         departureDelay: resp.departureDelay
-    }
+    };
 }

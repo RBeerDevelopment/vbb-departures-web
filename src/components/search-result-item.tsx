@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import type { LocationModel } from "@server/trpc/models/location"
+import type { LocationModel } from "@server/trpc/models/location";
 import { ProductRow } from "./product-row";
 
 interface Props {
@@ -11,7 +11,7 @@ export function SearchResultItem(props: Props): React.ReactElement {
 
     const { location } = props;
 
-    const { name, products, id } = location
+    const { name, products, id } = location;
     return (
         <Link href={`/departures/${id}`}>
             <div className="bg-white text-black w-full flex flex-col gap-2 p-3 cursor-pointer">

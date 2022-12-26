@@ -13,11 +13,11 @@ import { trpc } from "@utils/trpc";
 import { useCurrentRefetchFns } from "@components/refresh-button";
 import { TripDetailSection } from "@components/trip-detail-section";
 
-const refetchInterval = 15 * 1000 // 15 sec
+const refetchInterval = 15 * 1000; // 15 sec
 const Departures: NextPage = () => {
 
-    const router = useRouter()
-    const { stationId, tripId, lineName } = router.query
+    const router = useRouter();
+    const { stationId, tripId, lineName } = router.query;
 
 
     const { data: trip, isLoading, refetch } = trpc.trip.byTripId.useQuery(
@@ -37,14 +37,14 @@ const Departures: NextPage = () => {
 
     let linePolyline: PolylinePoints | undefined = trip?.polyline?.features?.map(f => {
         if (!f.geometry.coordinates) return [NaN, NaN];
-        return [f.geometry.coordinates[1] as number, f.geometry.coordinates[0] as number]
+        return [f.geometry.coordinates[1] as number, f.geometry.coordinates[0] as number];
     });
 
-    linePolyline = linePolyline?.filter(p => !(isNaN(p[0]) || isNaN(p[1])))
+    linePolyline = linePolyline?.filter(p => !(isNaN(p[0]) || isNaN(p[1])));
     let content: ReactNode = <p className="italic ">No data found for line {lineName}.</p>;
 
     if (isLoading) {
-        content = <LoadingIndicator />
+        content = <LoadingIndicator />;
     }
 
     if (trip) {

@@ -1,1 +1,1 @@
-export { TripSection } from "./trip-section"
+export { TripSection } from "./trip-section";

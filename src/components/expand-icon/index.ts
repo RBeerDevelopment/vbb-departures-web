@@ -1,1 +1,1 @@
-export { ExpandIcon } from "./expand-icon"
+export { ExpandIcon } from "./expand-icon";

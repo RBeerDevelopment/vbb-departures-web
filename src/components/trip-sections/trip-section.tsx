@@ -13,7 +13,7 @@ interface Props {
 export function TripSection(props: Props): React.ReactElement {
 
     const { trip, polylinePoints } = props;
-    const lineBgClass = `bg-${trip.lineName.toLowerCase()}`
+    const lineBgClass = `bg-${trip.lineName.toLowerCase()}`;
 
     const currentLocationPolylinePoint: PolylinePoint = [trip.currentLocation?.latitude || 0, trip.currentLocation?.longitude || 0];
     const tripProgress = calculateTripProgress(polylinePoints || [], currentLocationPolylinePoint);

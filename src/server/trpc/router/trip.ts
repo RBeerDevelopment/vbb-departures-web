@@ -18,7 +18,7 @@ export const tripRouter = router({
 
             const { tripId, lineName, stopovers, polyline } = input;
 
-            const apiUrl = new URL(env.VBB_API_URL + `trips/${encodeURIComponent(tripId)}`);
+            const apiUrl = new URL(`${env.VBB_API_URL  }trips/${encodeURIComponent(tripId)}`);
 
             apiUrl.searchParams.append("lineName", String(lineName));
             apiUrl.searchParams.append("stopovers", String(stopovers));

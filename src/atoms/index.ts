@@ -1,1 +1,1 @@
-export { currentRefetchAtom } from "./current-refetch-atom"
+export { currentRefetchAtom } from "./current-refetch-atom";

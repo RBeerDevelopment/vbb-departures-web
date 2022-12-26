@@ -1,1 +1,1 @@
-export { TimeWithDelay } from "./time-with-delay"
+export { TimeWithDelay } from "./time-with-delay";

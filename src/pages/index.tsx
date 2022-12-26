@@ -31,21 +31,21 @@ const Home: NextPage = () => {
   const [locationError, setLocationError] = useState<string>();
 
 
-  const [parent] = useAutoAnimate({ duration: 400 })
+  const [parent] = useAutoAnimate({ duration: 400 });
 
   function queryNearby() {
     setIsLocationLoading(true);
     if (!navigator.geolocation) {
       return;
     }
-    setSearchQuery("")
+    setSearchQuery("");
     navigator.geolocation.getCurrentPosition((pos) => {
       setUserCoords(pos.coords);
       setIsLocationLoading(false);
     }, (error) => {
       setIsLocationLoading(false);
-      setLocationError(error.message)
-    })
+      setLocationError(error.message);
+    });
 
   }
 

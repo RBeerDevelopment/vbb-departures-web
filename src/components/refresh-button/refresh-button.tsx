@@ -13,11 +13,11 @@ export function RefreshButton(): React.ReactElement {
     function refetch() {
         if (isFetching) return;
 
-        currentRefetchFns.forEach(fn => fn())
+        currentRefetchFns.forEach(fn => fn());
     }
 
     if (isFetching) {
-        return <NavbarLoadingIndicator />
+        return <NavbarLoadingIndicator />;
     }
 
     return (

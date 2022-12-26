@@ -13,7 +13,7 @@ export function SimpleStopOverview(props: Props): React.ReactElement {
 
     const { stop, stopState, bgColor } = props;
 
-    console.log({ name: stop.stopName, stopState })
+    console.log({ name: stop.stopName, stopState });
 
     return (
         <div className="flex flex-row gap-4 pl-4 h-16 items-center justify-between">

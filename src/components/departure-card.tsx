@@ -16,7 +16,7 @@ export function DepartureCard(props: Props): React.ReactElement {
     let lineNameTextColor = "text-white";
 
     if (!isNaN(+departure.lineName) && Number(departure.lineName) > 89) {
-        lineNameTextColor = "text-black border border-black"
+        lineNameTextColor = "text-black border border-black";
     }
 
     return (

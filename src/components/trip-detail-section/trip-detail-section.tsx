@@ -18,24 +18,26 @@ export function TripDetailSection(props: Props): React.ReactElement {
 
     const { trip, stationId } = props;
 
-    const [expanded, setExpanded] = useState(false)
-    const [parent] = useAutoAnimate({ duration: 400 })
+    const [expanded, setExpanded] = useState(false);
+    const [parent] = useAutoAnimate({ duration: 400 });
 
     if(!trip.stopovers) {
         return <></>;
     }
 
-    const selectedStation = trip.stopovers.find(s => s.id === stationId)
+    const selectedStation = trip.stopovers.find(s => s.id === stationId);
 
     if(!selectedStation) {
         return <></>;
     }
 
-    let content: React.ReactNode = <SingleStationDetail selectedStation={selectedStation} />
+    const bgColor = `bg-${trip.lineName.toLowerCase()}`;
+
+    let content: React.ReactNode = <SingleStationDetail selectedStation={selectedStation} />;
 
     if(expanded) {
         // todo find better way to calculate current station
-        content = trip.stopovers.map(s => <div key={s.id}><SimpleStopOverview stop={s} stopState={calcualteStopState(s)} /></div>)
+        content = trip.stopovers.map(s => <div key={s.id}><SimpleStopOverview bgColor={bgColor} stop={s} stopState={calcualteStopState(s)} /></div>);
     }
 
     return (
