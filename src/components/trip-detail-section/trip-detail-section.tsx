@@ -36,19 +36,22 @@ export function TripDetailSection(props: Props): React.ReactElement {
     let content: React.ReactNode = <SingleStationDetail selectedStation={selectedStation} />;
 
     if(expanded) {
+        // todo think about using a combination of time and location based approaches here
         let currentStopIndex = trip.stopovers.findIndex(stop => {
             return isArrivalNow(stop);
         });
+
         if(currentStopIndex < 0) {
             currentStopIndex = trip.stopovers.findIndex(stop => {
                 return isArrivalInPast(stop) && !isDepartureInPast(stop);
             });
         }
+        
         if(currentStopIndex < 0) {
             // if no station index could be found until now, 
             // the station has to be the one before the first one that hasn't been reacht yet
             currentStopIndex = trip.stopovers.findIndex(stop => {
-                return !isArrivalInPast(stop);
+                return stop.arrival && !isArrivalInPast(stop);
             });
             currentStopIndex -= 1;
         }
