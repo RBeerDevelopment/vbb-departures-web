@@ -11,17 +11,17 @@ export function DelayText(props: Props): React.ReactElement {
     let color = "text-black";
     let delayStr = String(delay);
 
+    if(delay === 0) return <></>;
+    
     if (delay > 0) {
         color = "text-red-800";
-        delayStr = "+" + delay;
+        delayStr = `+${  delay}`;
     }
     else if (delay < 0) color = "text-green-800";
 
-    else delayStr = ""
-
     return (
-        <p className={`${color} text-md font-bold`}>
+        <span className={`${color} text-md font-bold`}>
             {delayStr.length > 0 && `${delayStr} min`}
-        </p>
+        </span>
     );
 }

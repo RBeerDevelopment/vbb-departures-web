@@ -1,6 +1,6 @@
 import axios from "axios";
 import { z } from "zod";
-import { env } from "../../../env/server.mjs";
+import { env } from "@env/server.mjs";
 import type { DepatureResponse } from "../models/departure.js";
 import { mapDepartureResponseToDeparture } from "../models/departure";
 
@@ -13,7 +13,7 @@ export const departureRouter = router({
 
             const { stationId, resultCount, duration } = input;
 
-            const apiUrl = new URL(env.VBB_API_URL + `stops/${stationId}/departures`);
+            const apiUrl = new URL(`${env.VBB_API_URL}stops/${stationId}/departures`);
 
             apiUrl.searchParams.append("results", String(resultCount));
             apiUrl.searchParams.append("duration", String(duration));

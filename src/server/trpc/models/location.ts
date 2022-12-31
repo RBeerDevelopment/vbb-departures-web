@@ -33,5 +33,5 @@ export function mapLocationResponseToLocation(resp: LocationResponse): LocationM
         name: resp.name,
         products: resp.products,
         distance: resp.distance
-    }
+    };
 }

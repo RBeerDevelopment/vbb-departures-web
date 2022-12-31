@@ -1,9 +1,9 @@
 import React from "react";
-import type { Trip } from "../../server/trpc/models/trip";
-import { findIndexOfClosestPoint } from "../../utils/coordinates";
-import { formatTimeHHMM } from "../../utils/format-time";
-import { DelayText } from "../delay-text";
-import type { PolylinePoint, PolylinePoints } from "../map-section";
+import type { Trip } from "@server/trpc/models/trip";
+import { findIndexOfClosestPoint } from "@utils/coordinates";
+import { DetailCard } from "@components/detail-card";
+import type { PolylinePoint, PolylinePoints } from "@components/map-section";
+import { TimeWithDelay } from "@components/time-with-delay";
 
 interface Props {
     trip: Trip,
@@ -13,13 +13,13 @@ interface Props {
 export function TripSection(props: Props): React.ReactElement {
 
     const { trip, polylinePoints } = props;
-    const lineBgClass = `bg-${trip.lineName.toLowerCase()}`
+    const lineBgClass = `bg-${trip.lineName.toLowerCase()}`;
 
     const currentLocationPolylinePoint: PolylinePoint = [trip.currentLocation?.latitude || 0, trip.currentLocation?.longitude || 0];
     const tripProgress = calculateTripProgress(polylinePoints || [], currentLocationPolylinePoint);
 
     return (
-        <div className="flex flex-col items-start bg-white w-11/12 lg:w-1/2 min-h-min rounded-md my-4 p-4">
+        <DetailCard>
             <h2 className={`text-2xl font-medium text-${trip.lineName.toLowerCase()}`}>{trip.lineName} ({trip.direction})</h2>
             <div className="w-full flex flex-col items-center py-4">
                 <div className="w-full flex justify-between items-center font-light text-sm px-2 py-2">
@@ -32,11 +32,11 @@ export function TripSection(props: Props): React.ReactElement {
                     </div>
                 </div>
                 <div className="w-full flex justify-between items-center font-light text-sm px-5 py-2">
-                    <p>{formatTimeHHMM(trip.departure)} {Boolean(trip.departureDelay) && <DelayText delay={trip.departureDelay} />}</p>
-                    <p>{formatTimeHHMM(trip.arrival)} {Boolean(trip.arrivalDelay) && <DelayText delay={trip.arrivalDelay} />}</p>
+                    <TimeWithDelay time={trip.departure} delay={trip.departureDelay} />
+                    <TimeWithDelay time={trip.arrival} delay={trip.arrivalDelay} />
                 </div>
             </div>
-        </div>
+        </DetailCard>
     );
 }
 

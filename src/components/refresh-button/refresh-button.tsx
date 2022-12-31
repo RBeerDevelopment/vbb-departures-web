@@ -1,8 +1,8 @@
 import { useIsFetching } from "@tanstack/react-query";
 import { useAtomValue } from "jotai";
 import React from "react";
-import { currentRefetchAtom } from "../../atoms";
-import { NavbarLoadingIndicator } from "../loading-indicators";
+import { currentRefetchAtom } from "@atoms/index";
+import { NavbarLoadingIndicator } from "@components/loading-indicators";
 
 export function RefreshButton(): React.ReactElement {
 
@@ -13,11 +13,11 @@ export function RefreshButton(): React.ReactElement {
     function refetch() {
         if (isFetching) return;
 
-        currentRefetchFns.forEach(fn => fn())
+        currentRefetchFns.forEach(fn => fn());
     }
 
     if (isFetching) {
-        return <NavbarLoadingIndicator />
+        return <NavbarLoadingIndicator />;
     }
 
     return (

@@ -4,18 +4,18 @@
 
 import React from "react";
 
-import { env } from "../../env/client.mjs"
+import { env } from "@env/client.mjs";
 
-import { Map, MapkitProvider, Marker } from 'react-mapkit'
+import { Map, MapkitProvider } from 'react-mapkit';
 import type { PolylinePoints } from "./map-polyline";
 import { MapPolyline } from "./map-polyline";
 import type { MapLocation } from "./map-location";
 
-import resolveConfig from 'tailwindcss/resolveConfig'
-import tailwindConfig from "../../../tailwind.config.cjs"
-import { findIndexOfClosestPoint } from "../../utils/coordinates";
+import resolveConfig from 'tailwindcss/resolveConfig';
+import tailwindConfig from "../../../tailwind.config.cjs";
+import { findIndexOfClosestPoint } from "@utils/coordinates";
 
-const tailwindConfigObj = resolveConfig(tailwindConfig)
+const tailwindConfigObj = resolveConfig(tailwindConfig);
 
 interface Props {
     polylinePoints?: PolylinePoints
@@ -31,7 +31,7 @@ export function MapSection(props: Props): React.ReactElement {
         currentLocation
     } = props;
 
-    const lineColorCode = tailwindConfigObj.theme?.colors[lineName.toLowerCase()]
+    const lineColorCode = tailwindConfigObj.theme?.colors[lineName.toLowerCase()];
 
     const region = calculateVisibleRegionFromPolyline(polylinePoints);
 
@@ -42,7 +42,7 @@ export function MapSection(props: Props): React.ReactElement {
     // also include current position as nearest point on line may be substantially behind train
     // TODO: this does not account for a situation where the next point on the line is further than the train location
     // this should be addressed in the future
-    const completedPolylinePoints = [...polylinePoints.slice(0, indexOfClosestPointOnLine), currentLocationPolylinePoint]
+    const completedPolylinePoints = [...polylinePoints.slice(0, indexOfClosestPointOnLine), currentLocationPolylinePoint];
 
     return (
         <div className="h-96 w-11/12 lg:w-1/2 rounded-lg">
@@ -74,5 +74,5 @@ function calculateVisibleRegionFromPolyline(polylinePoints: PolylinePoints) {
         longitude: (maxLong + minLong) / 2,
         latitudeSpan: maxLat - minLat,
         longitudeSpan: maxLong - minLong
-    }
+    };
 }

@@ -1,4 +1,3 @@
-
 interface Location {
     type: string;
     id: string;
@@ -149,6 +148,32 @@ export interface TripResponse {
     departurePrognosisType: string;
     id: string;
     realtimeDataUpdatedAt: number;
+    stopovers?: StopoverResponse[]
+}
+
+interface StopoverResponse {
+    stop: Stop;
+    arrival?: Date;
+    plannedArrival?: Date;
+    arrivalDelay?: number;
+    arrivalPlatform: string;
+    arrivalPrognosisType: string;
+    plannedArrivalPlatform: string;
+    departure?: Date;
+    plannedDeparture?: Date;
+    departureDelay?: number;
+    departurePlatform: string;
+    departurePrognosisType: string;
+    plannedDeparturePlatform: string;
+}
+
+interface Stop {
+    type: string;
+    id: string;
+    name: string;
+    location: Location;
+    products: Products;
+    stationDHID: string;
 }
 
 export interface Trip {
@@ -169,8 +194,21 @@ export interface Trip {
     currentLocation: CurrentLocation
     updatedAt: number
 
-    polyline: Polyline
+    polyline?: Polyline
+    stopovers?: Stopover[]
+}
 
+export interface Stopover {
+    id: string
+    stopName: string;
+    arrival?: Date;
+    plannedArrival?: Date;
+    arrivalDelay?: number;
+    platform: string;
+    plannedPlatform: string;
+    departure?: Date;
+    plannedDeparture?: Date;
+    departureDelay?: number;
 }
 
 export function mapTripResponseToTrip(resp: TripResponse): Trip {
@@ -188,6 +226,22 @@ export function mapTripResponseToTrip(resp: TripResponse): Trip {
         direction: resp.direction,
         currentLocation: resp.currentLocation,
         updatedAt: resp.realtimeDataUpdatedAt,
-        polyline: resp.polyline
-    }
+        polyline: resp.polyline,
+        stopovers: resp.stopovers ? resp.stopovers.map(mapStopoverResponseToStopover) : undefined
+    };
+}
+
+function mapStopoverResponseToStopover(resp: StopoverResponse): Stopover {
+    return {
+        id: resp.stop.id,
+        stopName: resp.stop.name,
+        arrival: resp.arrival ? new Date(resp.arrival) : undefined,
+        plannedArrival: resp.plannedArrival ? new Date(resp.plannedArrival) : undefined,
+        arrivalDelay: resp.arrivalDelay,
+        platform: resp.arrivalPlatform,
+        plannedPlatform: resp.plannedArrivalPlatform,
+        departure: resp.departure ? new Date(resp.departure) : undefined,
+        plannedDeparture: resp.plannedDeparture ? new Date(resp.plannedDeparture) : undefined,
+        departureDelay: resp.departureDelay
+    };
 }

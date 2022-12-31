@@ -58,5 +58,5 @@ export function mapDepartureResponseToDeparture(resp: DepatureResponse): Departu
         lineName: resp.line.name,
         transportType: resp.line.mode,
         destinationName: resp.destination.name,
-    }
+    };
 }

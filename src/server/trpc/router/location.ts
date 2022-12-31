@@ -1,6 +1,6 @@
 import axios from "axios";
 import { z } from "zod";
-import { env } from "../../../env/server.mjs";
+import { env } from "@env/server.mjs";
 import type { LocationResponse } from "../models/location";
 import { mapLocationResponseToLocation } from "../models/location";
 
@@ -11,14 +11,14 @@ export const locationRouter = router({
         .input(z.object({ query: z.string() }))
         .query(async ({ input }) => {
 
-            const apiUrl = new URL(env.VBB_API_URL + "locations");
+            const apiUrl = new URL(`${env.VBB_API_URL}locations`);
 
             apiUrl.searchParams.append("query", input.query);
             apiUrl.searchParams.append("fuzzy", "true");
             apiUrl.searchParams.append("addresses", "false");
             apiUrl.searchParams.append("poi", "false");
             apiUrl.searchParams.append("results", "10");
-            apiUrl.searchParams.append("lang", "de")
+            apiUrl.searchParams.append("lang", "de");
 
             const resp = await axios.get<LocationResponse[]>(apiUrl.toString());
 
@@ -33,7 +33,7 @@ export const locationRouter = router({
         }))
         .query(async ({ input }) => {
 
-            const apiUrl = new URL(env.VBB_API_URL + "stops/nearby");
+            const apiUrl = new URL(`${env.VBB_API_URL}stops/nearby`);
 
             apiUrl.searchParams.append("latitude", String(input.lat));
             apiUrl.searchParams.append("longitude", String(input.long));

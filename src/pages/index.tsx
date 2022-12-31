@@ -2,14 +2,14 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { type NextPage } from "next";
 import type { LegacyRef } from "react";
 import React, { useState } from "react";
-import { DebouncedInput } from "../components/debounced-input";
-import { LoadingIndicator } from "../components/loading-indicators/loading-indicator";
-import { NavBar } from "../components/nav-bar";
-import { NearbyInput } from "../components/nearby-input";
-import { useCurrentRefetchFns } from "../components/refresh-button";
-import { SearchResultItem } from "../components/search-result-item";
+import { DebouncedInput } from "@components/debounced-input";
+import { LoadingIndicator } from "@components/loading-indicators/loading-indicator";
+import { NavBar } from "@components/nav-bar";
+import { NearbyInput } from "@components/nearby-input";
+import { useCurrentRefetchFns } from "@components/refresh-button";
+import { SearchResultItem } from "@components/search-result-item";
 
-import { trpc } from "../utils/trpc";
+import { trpc } from "@utils/trpc";
 
 const Home: NextPage = () => {
 
@@ -31,21 +31,21 @@ const Home: NextPage = () => {
   const [locationError, setLocationError] = useState<string>();
 
 
-  const [parent] = useAutoAnimate({ duration: 400 })
+  const [parent] = useAutoAnimate({ duration: 400 });
 
   function queryNearby() {
     setIsLocationLoading(true);
     if (!navigator.geolocation) {
       return;
     }
-    setSearchQuery("")
+    setSearchQuery("");
     navigator.geolocation.getCurrentPosition((pos) => {
       setUserCoords(pos.coords);
       setIsLocationLoading(false);
     }, (error) => {
       setIsLocationLoading(false);
-      setLocationError(error.message)
-    })
+      setLocationError(error.message);
+    });
 
   }
 

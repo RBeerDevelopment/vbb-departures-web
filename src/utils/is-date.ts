@@ -1,3 +1,3 @@
-export function isDate(d: any): d is Date {
+export function isDate(d: unknown): d is Date {
     return d instanceof Date;
 }
