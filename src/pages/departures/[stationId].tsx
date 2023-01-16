@@ -9,12 +9,17 @@ import { NavBar } from "@components/nav-bar";
 import { useCurrentRefetchFns } from "@components/refresh-button";
 
 import { trpc } from "@utils/trpc";
+import { favoriteStationAtom } from "@atoms/favorite-station-atom";
+import { useAtom } from "jotai";
 
 const Departures: NextPage = () => {
 
     const router = useRouter();
-    const { stationId } = router.query;
+    const stationId = String(router.query.stationId);
 
+    const [favoriteStations, setFavoriteStations] = useAtom(favoriteStationAtom);
+
+    const isFavoriteStation = favoriteStations.includes(stationId);
 
     const { data: departures, isLoading, refetch } = trpc.departure.byStationId.useQuery({ stationId: String(stationId) }, { enabled: Boolean(stationId) });
     useCurrentRefetchFns([refetch]);
@@ -31,6 +36,19 @@ const Departures: NextPage = () => {
         ));
     }
 
+    function toggleFavoriteStation() {
+        if(isFavoriteStation) {
+            setFavoriteStations((prev) => {
+                return prev.filter(s => s !== stationId);
+            });
+            return;
+        }
+
+        setFavoriteStations((prev) => {
+            return [...prev, stationId];
+        });
+    }
+
     return (
         <>
             <Head>
@@ -39,7 +57,7 @@ const Departures: NextPage = () => {
             </Head>
 
             <main className="w-full mx-auto flex h-screen flex-col justify-center bg-slate-300">
-                <NavBar />
+                <NavBar favoriteFn={toggleFavoriteStation} isFavorite={isFavoriteStation}/>
                 <div className="overflow-y-scroll w-full flex flex-col mx-auto items-center py-16">
                     {content}
                 </div>
