@@ -4,13 +4,17 @@ import { trpc } from "@utils/trpc";
 
 import "@styles/globals.css";
 import Head from "next/head";
+import { env } from "@env/client.mjs";
 
 
 const MyApp: AppType = ({ Component, pageProps }) => {
+
+  const isProd = env.NEXT_PUBLIC_IS_PROD;
+
   return (
     <>
       <Head>
-        <title>VBB Departures</title>
+        <title>{`VBB Departures ${!isProd ? "(Preview)" : ""}`}</title>
         <meta name="description" content="An app to see VBB departures including real time delays." />
         <meta
           name="viewport"
