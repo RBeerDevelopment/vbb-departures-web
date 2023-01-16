@@ -9,7 +9,7 @@ export function FavoriteStations(): React.ReactElement {
 
     const stationCards = favoriteStations.map(fs => <FavoriteStationCard key={fs.id} station={fs} />);
     return (
-        <div className="flex flex-col gap-4 w-full p-6">
+        <div className="flex flex-col gap-4 lg:w-1/3 w-full p-6">
            {stationCards}
         </div>
     );

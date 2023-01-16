@@ -13,7 +13,7 @@ export function FavoriteStationCard(props: Props): React.ReactElement {
     
     return (
         <Link href={`/departures/${station.id}`}>
-            <div className="bg-white rounded-lg text-black w-full p-4 py-3 text-lg cursor-pointer">
+            <div className="bg-white shadow-lg rounded-lg text-black w-full p-4 py-3 text-lg cursor-pointer">
             {station.name}
             </ div>
         </Link>
