@@ -17,6 +17,7 @@ export const serverSchema = z.object({
  */
 export const clientSchema = z.object({
   NEXT_PUBLIC_MAPKIT_TOKEN: z.string(),
+  NEXT_PUBLIC_IS_PROD: z.boolean()
 });
 
 /**
@@ -27,4 +28,5 @@ export const clientSchema = z.object({
  */
 export const clientEnv = {
   NEXT_PUBLIC_MAPKIT_TOKEN: process.env.NEXT_PUBLIC_MAPKIT_TOKEN,
+  NEXT_PUBLIC_IS_PROD: Boolean(process.env.NEXT_PUBLIC_IS_PROD)
 };
