@@ -32,6 +32,7 @@ interface CurrentTripPosition {
 export interface DepatureResponse {
     tripId: string
     when: string;
+    stop: { name: string }
     delay: number;
     direction: string;
     line: Line;
@@ -42,6 +43,7 @@ export interface DepatureResponse {
 export interface Departure {
     id: string
     when: Date
+    stopName: string
     delay: number
     direction: string
     lineName: string
@@ -53,6 +55,7 @@ export function mapDepartureResponseToDeparture(resp: DepatureResponse): Departu
     return {
         id: resp.tripId,
         when: new Date(resp.when),
+        stopName: resp.stop.name,
         delay: resp.delay,
         direction: resp.direction,
         lineName: resp.line.name,

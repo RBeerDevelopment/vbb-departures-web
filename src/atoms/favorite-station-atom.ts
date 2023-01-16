@@ -1,4 +1,9 @@
 import { atomWithStorage } from "jotai/utils";
 
-export const favoriteStationAtom = atomWithStorage<string[]>("favoriteStations", []);
+export interface FavoriteStation {
+    id: string
+    name: string
+}
+
+export const favoriteStationAtom = atomWithStorage<FavoriteStation[]>("favoriteStations", []);
 

@@ -19,7 +19,7 @@ const Departures: NextPage = () => {
 
     const [favoriteStations, setFavoriteStations] = useAtom(favoriteStationAtom);
 
-    const isFavoriteStation = favoriteStations.includes(stationId);
+    const isFavoriteStation = favoriteStations.map(s => s.id).includes(stationId);
 
     const { data: departures, isLoading, refetch } = trpc.departure.byStationId.useQuery({ stationId: String(stationId) }, { enabled: Boolean(stationId) });
     useCurrentRefetchFns([refetch]);
@@ -39,13 +39,15 @@ const Departures: NextPage = () => {
     function toggleFavoriteStation() {
         if(isFavoriteStation) {
             setFavoriteStations((prev) => {
-                return prev.filter(s => s !== stationId);
+                return prev.filter(s => s.id !== stationId);
             });
             return;
         }
 
+        const stationName = departures ? departures[0]?.stopName || "" : "";
+
         setFavoriteStations((prev) => {
-            return [...prev, stationId];
+            return [...prev, { id: stationId, name: stationName }];
         });
     }
 
