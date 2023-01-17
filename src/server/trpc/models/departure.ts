@@ -11,7 +11,7 @@ export interface Line {
     name: string;
     productName: string;
     mode: TransportType;
-    product: string;
+    product: LineType;
     symbol: string;
     nr: number;
     color: Color;
@@ -36,9 +36,12 @@ export interface DepatureResponse {
     delay: number;
     direction: string;
     line: Line;
+    type: LineType;
     destination: Destination;
     currentTripPosition: CurrentTripPosition;
 }
+
+export type LineType = "suburban" | "subway" | "tram" | "bus" | "ferry" | "express" | "regional"
 
 export interface Departure {
     id: string
@@ -47,6 +50,7 @@ export interface Departure {
     delay: number
     direction: string
     lineName: string
+    lineType: LineType
     transportType: TransportType
     destinationName: string
 }
@@ -59,6 +63,7 @@ export function mapDepartureResponseToDeparture(resp: DepatureResponse): Departu
         delay: resp.delay,
         direction: resp.direction,
         lineName: resp.line.name,
+        lineType: resp.line.product,
         transportType: resp.line.mode,
         destinationName: resp.destination.name,
     };
