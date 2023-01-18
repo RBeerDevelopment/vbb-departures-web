@@ -73,11 +73,15 @@ const Departures: NextPage = () => {
         });
     }
 
+    const hasMultipleLinesOrLineTypes = 
+        (lineTypes && lineTypes.length > 1) 
+        || (lines && lines.length > 1);
+
     return (
         <main className="w-full mx-auto flex h-screen flex-col bg-slate-300">
             <NavBar favoriteFn={toggleFavoriteStation} isFavorite={isFavoriteStation}/>
             <div className="pt-16 pb-4 w-full overflow-y-scroll ">
-                {lines && lines.length > 1 && (<div className="flex flex-row gap-4 py-2 pl-3">
+                {hasMultipleLinesOrLineTypes && (<div className="flex flex-row gap-4 py-2 pl-3">
                     <LineTypeFilter lineTypes={lineTypes} setSelectedLineType={setLineTypeFilter}/>
                     <LineFilter lines={lines} setSelectedLine={setLineFilter} />
                 </div>)}
