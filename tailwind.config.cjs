@@ -57,7 +57,7 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
   safelist: [
     "bg-s1",
     "bg-s2",
