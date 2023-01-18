@@ -1,3 +1,4 @@
+import { sortAlphabetically } from "@utils/sort";
 import React from "react";
 
 interface Props {
@@ -20,13 +21,3 @@ export function LineFilter(props: Props): React.ReactElement {
         </select>
     );
 }
-
-function sortAlphabetically(a: string, b: string) {
-    if (a < b) {
-      return -1;
-    }
-    if (a > b) {
-      return 1;
-    }
-    return 0;
-  }
