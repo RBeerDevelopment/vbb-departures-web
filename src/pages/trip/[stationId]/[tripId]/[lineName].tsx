@@ -23,7 +23,6 @@ const Departures: NextPage = () => {
     const { data: trip, isLoading, refetch } = trpc.trip.byTripId.useQuery(
         {
             tripId: tripId as string || "",
-            lineName: lineName as string || "",
             stopovers: true,
             polyline: true
         },

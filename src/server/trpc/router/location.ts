@@ -1,30 +1,24 @@
-import axios from "axios";
 import { z } from "zod";
-import { env } from "@env/server.mjs";
 import type { LocationResponse } from "../models/location";
 import { mapLocationResponseToLocation } from "../models/location";
 
 import { router, publicProcedure } from "../trpc";
+import { hafasClient } from "@utils/vbb-hafas";
 
 export const locationRouter = router({
     byFuzzyName: publicProcedure
-        .input(z.object({ query: z.string() }))
+        .input(z.object({ query: z.string(), resultCount: z.number().default(10) }))
         .query(async ({ input }) => {
 
-            const apiUrl = new URL(`${env.VBB_API_URL}locations`);
+            const locations: LocationResponse[] = await hafasClient.locations(input.query, {
+                fuzzy: true,
+                poi: false,
+                addresses: false,
+                results: input.resultCount,
+                lang: "de"
+            });
 
-            apiUrl.searchParams.append("query", input.query);
-            apiUrl.searchParams.append("fuzzy", "true");
-            apiUrl.searchParams.append("addresses", "false");
-            apiUrl.searchParams.append("poi", "false");
-            apiUrl.searchParams.append("results", "10");
-            apiUrl.searchParams.append("lang", "de");
-
-            const resp = await axios.get<LocationResponse[]>(apiUrl.toString());
-
-            const data = resp.data.map(mapLocationResponseToLocation);
-
-            return data;
+            return locations.map(mapLocationResponseToLocation);
         }),
     byLocation: publicProcedure
         .input(z.object({
@@ -33,18 +27,16 @@ export const locationRouter = router({
         }))
         .query(async ({ input }) => {
 
-            const apiUrl = new URL(`${env.VBB_API_URL}stops/nearby`);
+            const locations: LocationResponse[] = await hafasClient.nearby({
+                type: 'location',
+                longitude: input.long,
+                latitude: input.lat
+            }, {
+                results: 10,
+                poi: false,
+                distance: 1000
+            });
 
-            apiUrl.searchParams.append("latitude", String(input.lat));
-            apiUrl.searchParams.append("longitude", String(input.long));
-            apiUrl.searchParams.append("results", "10");
-            apiUrl.searchParams.append("poi", "false");
-            apiUrl.searchParams.append("distance", "1000");
-
-            const resp = await axios.get<LocationResponse[]>(apiUrl.toString());
-
-            const data = resp.data.map(mapLocationResponseToLocation);
-
-            return data;
+            return locations.map(mapLocationResponseToLocation);
         }),
 });
