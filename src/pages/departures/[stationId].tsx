@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
 import type { ReactNode} from "react";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import React, { useState } from "react";
 import { DepartureCard } from "@components/departure-card";
 import { LoadingIndicator } from "@components/loading-indicators/loading-indicator";
@@ -14,8 +14,7 @@ import type { LineTypeWithAll } from "@components/filters";
 import { LineTypeFilter } from "@components/filters";
 import { LineFilter } from "@components/filters";
 import type { Departure, LineType } from "@server/trpc/models/departure";
-
-
+import { lineNameToId } from "@utils/line-name-to-id";
 
 const Departures: NextPage = () => {
 
@@ -31,7 +30,14 @@ const Departures: NextPage = () => {
 
     const isFavoriteStation = favoriteStations.map(s => s.id).includes(stationId);
 
-    const { data: departures, isLoading, refetch } = trpc.departure.byStationId.useQuery({ stationId: String(stationId) }, { enabled: Boolean(stationId) });
+    const { data: departures, isLoading, refetch } = trpc.departure.byStationId.useQuery(
+        { 
+            stationId: String(stationId), 
+            ...(lineFilter !== "All" ? { lineId: lineNameToId(lineFilter) } : {})
+        }, 
+        { enabled: Boolean(stationId) }
+    );
+
     useCurrentRefetchFns([refetch]);
 
     const lines = [
@@ -40,6 +46,7 @@ const Departures: NextPage = () => {
             .map(d => d.lineName)
         )
     ];
+
     const lineTypes: LineType[] = [...new Set(departures?.map(d => d.lineType))];
 
     let content: ReactNode = <p className="italic">No departures found within the next 30 minutes.</p>;
@@ -81,10 +88,12 @@ const Departures: NextPage = () => {
         <main className="w-full mx-auto flex h-screen flex-col bg-slate-300">
             <NavBar favoriteFn={toggleFavoriteStation} isFavorite={isFavoriteStation}/>
             <div className="pt-16 pb-4 w-full overflow-y-scroll ">
-                {hasMultipleLinesOrLineTypes && (<div className="flex flex-row gap-4 py-2 pl-3">
-                    <LineTypeFilter lineTypes={lineTypes} setSelectedLineType={setLineTypeFilter}/>
-                    <LineFilter lines={lines} setSelectedLine={setLineFilter} />
-                </div>)}
+                {hasMultipleLinesOrLineTypes && (
+                    <div className="flex flex-row gap-4 py-2 pl-3">
+                        <LineTypeFilter lineTypes={lineTypes} setSelectedLineType={setLineTypeFilter}/>
+                        <LineFilter lines={lines} setSelectedLine={setLineFilter} />
+                    </div>
+                )}
                 <div className="flex mx-auto flex-col items-center">
                     {content}
                 </div>

@@ -16,7 +16,6 @@ export const tripRouter = router({
 
             const { tripId, stopovers, polyline } = input;
 
-
             const { trip }: { trip: TripResponse } = await hafasClient.trip(tripId, {
                 remarks: false,
                 polyline,
