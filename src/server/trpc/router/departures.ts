@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { router, publicProcedure } from "../trpc";
 import { hafasClient } from "@utils/vbb-hafas/client";
+import type { Departure } from "../models/departure";
 import { mapDepartureResponseToDeparture } from "../models/departure";
 
 export const departureRouter = router({
@@ -20,7 +21,7 @@ export const departureRouter = router({
                 }
             );
 
-            const data = departures.map(mapDepartureResponseToDeparture);
+            const data: Departure[] = departures.map(mapDepartureResponseToDeparture);
             return data;
         }),
 });
