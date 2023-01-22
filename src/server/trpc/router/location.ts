@@ -10,7 +10,7 @@ export const locationRouter = router({
         .input(z.object({ query: z.string(), resultCount: z.number().default(10) }))
         .query(async ({ input }) => {
 
-            const results: LocationResponse[] = await hafasClient.locations(input.query, {
+            const locations: LocationResponse[] = await hafasClient.locations(input.query, {
                 fuzzy: true,
                 poi: false,
                 addresses: false,
@@ -18,8 +18,7 @@ export const locationRouter = router({
                 lang: "de"
             });
 
-            const data = results.map(mapLocationResponseToLocation);
-            return data;
+            return locations.map(mapLocationResponseToLocation);
         }),
     byLocation: publicProcedure
         .input(z.object({
@@ -28,7 +27,7 @@ export const locationRouter = router({
         }))
         .query(async ({ input }) => {
 
-            const results: LocationResponse[] = await hafasClient.nearby({
+            const locations: LocationResponse[] = await hafasClient.nearby({
                 type: 'location',
                 longitude: input.long,
                 latitude: input.lat
@@ -38,8 +37,6 @@ export const locationRouter = router({
                 distance: 1000
             });
 
-            const data = results.map(mapLocationResponseToLocation);
-
-            return data;
+            return locations.map(mapLocationResponseToLocation);
         }),
 });

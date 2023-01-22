@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { router, publicProcedure } from "../trpc";
 import { hafasClient } from "@utils/vbb-hafas/client";
-import type { Departure } from "../models/departure";
+import type { DepatureResponse } from "../models/departure";
 import { mapDepartureResponseToDeparture } from "../models/departure";
 
 export const departureRouter = router({
@@ -13,15 +13,16 @@ export const departureRouter = router({
 
             const { stationId, resultCount, duration } = input;
 
-            const { departures } = await hafasClient.departures(stationId,
-                {
-                    remarks: false,
-                    results: resultCount,
-                    duration: duration,
-                }
-            );
+            const { departures }: { departures: DepatureResponse[] } =
+                await hafasClient.departures(
+                    stationId,
+                    {
+                        remarks: false,
+                        results: resultCount,
+                        duration: duration,
+                    }
+                );
 
-            const data: Departure[] = departures.map(mapDepartureResponseToDeparture);
-            return data;
+            return departures.map(mapDepartureResponseToDeparture);
         }),
 });
