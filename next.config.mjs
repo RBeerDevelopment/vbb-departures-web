@@ -5,12 +5,13 @@
  */
 !process.env.SKIP_ENV_VALIDATION && (await import("./src/env/server.mjs"));
 
-import pwa from "next-pwa"
+import pwa from "next-pwa";
 
 const withPWA = pwa({
   dest: "public",
   register: true,
   skipWaiting: true,
+  mode: "production",
 });
 
 /** @type {import('next').NextConfig} */
