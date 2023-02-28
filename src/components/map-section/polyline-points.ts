@@ -1,2 +1,2 @@
-export type PolylinePoint = [number, number]
-export type PolylinePoints = PolylinePoint[]
+export type PolylinePoint = [number, number];
+export type PolylinePoints = PolylinePoint[];

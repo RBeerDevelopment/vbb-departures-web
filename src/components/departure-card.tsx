@@ -6,30 +6,40 @@ import { DelayText } from "./delay-text";
 import { formatMinDiffToNow } from "@utils/format-min-diff-to-now";
 
 interface Props {
-    departure: Departure
-    stationId: string
+  departure: Departure;
+  stationId: string;
 }
 
 export function DepartureCard(props: Props): React.ReactElement {
+  const { departure, stationId } = props;
 
-    const { departure, stationId } = props;
+  let lineNameTextColor = "text-white";
 
-    let lineNameTextColor = "text-white";
+  if (!isNaN(+departure.lineName) && Number(departure.lineName) > 89) {
+    lineNameTextColor = "text-black border border-black";
+  }
 
-    if (!isNaN(+departure.lineName) && Number(departure.lineName) > 89) {
-        lineNameTextColor = "text-black border border-black";
-    }
-
-    return (
-        <Link className="bg-white rounded-md w-11/12 md:w-1/2 py-3 px-2 my-2 flex flex-row gap-2" href={`/trip/${stationId}/${departure.id}/${departure.lineName}`}>
-            <span className={`px-2 py-2 h-12 w-12 ${lineNameTextColor} text-center text-xl rounded-lg bg-${departure.lineName.toLowerCase()}`}>{departure.lineName}</span>
-            <div className="flex flex-col overflow-hidden">
-                <p className="font-thin text-lg overflow-hidden whitespace-nowrap text-ellipsis">{departure.direction}</p>
-                <div className="flex flex-row gap-3">
-                    <p className="font-bold text-md">{formatMinDiffToNow(departure.when)}</p>
-                    <DelayText delay={departure.delay} />
-                </div>
-            </div>
-        </Link>
-    );
+  return (
+    <Link
+      className="my-2 flex w-11/12 flex-row gap-2 rounded-md bg-white py-3 px-2 md:w-1/2"
+      href={`/trip/${stationId}/${departure.id}/${departure.lineName}`}
+    >
+      <span
+        className={`h-12 w-12 px-2 py-2 ${lineNameTextColor} rounded-lg text-center text-xl bg-${departure.lineName.toLowerCase()}`}
+      >
+        {departure.lineName}
+      </span>
+      <div className="flex flex-col overflow-hidden">
+        <p className="overflow-hidden text-ellipsis whitespace-nowrap text-lg font-thin">
+          {departure.direction}
+        </p>
+        <div className="flex flex-row gap-3">
+          <p className="text-md font-bold">
+            {formatMinDiffToNow(departure.when)}
+          </p>
+          <DelayText delay={departure.delay} />
+        </div>
+      </div>
+    </Link>
+  );
 }

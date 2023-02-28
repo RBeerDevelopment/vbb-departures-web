@@ -1,5 +1,5 @@
 import { atom } from "jotai";
 
-type RefetchFns = (() => void)[]
+type RefetchFns = (() => void)[];
 
 export const currentRefetchAtom = atom<RefetchFns>([]);

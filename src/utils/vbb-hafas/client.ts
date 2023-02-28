@@ -2,4 +2,4 @@
 // @ts-ignore
 import { createVbbHafas } from "vbb-hafas";
 
-export const hafasClient = createVbbHafas('vbb-web');
+export const hafasClient = createVbbHafas("vbb-web");

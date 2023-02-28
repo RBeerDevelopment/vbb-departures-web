@@ -4,33 +4,41 @@ import React from "react";
 import { StopState } from "./stop-state";
 
 interface Props {
-    stop: Stopover,
-    stopState: StopState
-    bgColor: string
-    isSelectedStation: boolean
+  stop: Stopover;
+  stopState: StopState;
+  bgColor: string;
+  isSelectedStation: boolean;
 }
 
 export function SimpleStopOverview(props: Props): React.ReactElement {
+  const { stop, stopState, bgColor, isSelectedStation } = props;
 
-    const { stop, stopState, bgColor, isSelectedStation } = props;
-
-    return (
-        <div className="flex flex-row gap-4 pl-4 h-16 items-center justify-between">
-            <div className="w-3 h-full self-start items-center flex flex-col">
-                {(stopState === StopState.Past || stopState === StopState.Current) && 
-                    <div className={`w-1 h-1/2 ${bgColor}`}/>}
-                {stopState === StopState.Current ? 
-                    <div className={`w-3 h-3 ${bgColor} rounded-full z-10`} />
-                : <></>}
-                {stopState === StopState.Past ? 
-                    <div className={`w-1 h-1/2 ${bgColor}`} />
-                : <></>}
-            </div>
-            <p className={`text-left w-1/2 ${isSelectedStation ? "text-red-600" : ""}`}>{stop.stopName}</p>
-            <div className="flex flex-col w-1/3">
-                <TimeWithDelay time={stop.arrival} delay={stop.arrivalDelay} />
-                <TimeWithDelay time={stop.departure} delay={stop.departureDelay} />
-            </div>
-        </div>
-    );
+  return (
+    <div className="flex h-16 flex-row items-center justify-between gap-4 pl-4">
+      <div className="flex h-full w-3 flex-col items-center self-start">
+        {(stopState === StopState.Past || stopState === StopState.Current) && (
+          <div className={`h-1/2 w-1 ${bgColor}`} />
+        )}
+        {stopState === StopState.Current ? (
+          <div className={`h-3 w-3 ${bgColor} z-10 rounded-full`} />
+        ) : (
+          <></>
+        )}
+        {stopState === StopState.Past ? (
+          <div className={`h-1/2 w-1 ${bgColor}`} />
+        ) : (
+          <></>
+        )}
+      </div>
+      <p
+        className={`w-1/2 text-left ${isSelectedStation ? "text-red-600" : ""}`}
+      >
+        {stop.stopName}
+      </p>
+      <div className="flex w-1/3 flex-col">
+        <TimeWithDelay time={stop.arrival} delay={stop.arrivalDelay} />
+        <TimeWithDelay time={stop.departure} delay={stop.departureDelay} />
+      </div>
+    </div>
+  );
 }

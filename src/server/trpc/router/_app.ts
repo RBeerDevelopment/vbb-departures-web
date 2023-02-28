@@ -6,7 +6,7 @@ import { tripRouter } from "./trip";
 export const appRouter = router({
   location: locationRouter,
   departure: departureRouter,
-  trip: tripRouter
+  trip: tripRouter,
 });
 
 // export type definition of API
