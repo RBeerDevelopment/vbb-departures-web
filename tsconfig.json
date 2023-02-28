@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -21,27 +17,13 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
-      "@atoms/*": [
-        "src/atoms/*"
-      ],
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@env/*": [
-        "src/env/*"
-      ],
-      "@pages/*": [
-        "src/pages/*"
-      ],
-      "@server/*": [
-        "src/server/*"
-      ],
-      "@styles/*": [
-        "src/styles/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ]
+      "@atoms/*": ["src/atoms/*"],
+      "@components/*": ["src/components/*"],
+      "@env/*": ["src/env/*"],
+      "@pages/*": ["src/pages/*"],
+      "@server/*": ["src/server/*"],
+      "@styles/*": ["src/styles/*"],
+      "@utils/*": ["src/utils/*"]
     },
     "plugins": [
       {
@@ -57,7 +39,5 @@
     "**/*.mjs",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

@@ -1,16 +1,15 @@
 import React from "react";
 
 interface Props {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function DetailCard(props: Props): React.ReactElement {
+  const { children } = props;
 
-    const { children } = props;
-
-    return (
-        <div className="flex flex-col items-start bg-white w-11/12 lg:w-1/2 min-h-min rounded-md my-2 md:my-4 p-4">
-            {children}
-        </div>
-    );
+  return (
+    <div className="my-2 flex min-h-min w-11/12 flex-col items-start rounded-md bg-white p-4 md:my-4 lg:w-1/2">
+      {children}
+    </div>
+  );
 }

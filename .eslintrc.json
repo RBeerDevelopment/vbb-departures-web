@@ -8,7 +8,7 @@
   "rules": {
     "@typescript-eslint/consistent-type-imports": "warn",
     "semi": [2, "always"],
-    "prefer-const": ["error", {"destructuring": "all"}],
+    "prefer-const": ["error", { "destructuring": "all" }],
     "prefer-template": "error"
   }
 }

@@ -1,3 +1,3 @@
 export function isDate(d: unknown): d is Date {
-    return d instanceof Date;
+  return d instanceof Date;
 }
