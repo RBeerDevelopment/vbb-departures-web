@@ -1,26 +1,21 @@
 import { z } from "zod";
-import type { LocationResponse } from "../models/location";
+import type { LocationModel, LocationResponse } from "../models/location";
 import { mapLocationResponseToLocation } from "../models/location";
 
 import { router, publicProcedure } from "../trpc";
 import { hafasClient } from "@utils/vbb-hafas";
 
+import { cacheLocationQuery, getLocationCache } from "@utils/redis";
+
 export const locationRouter = router({
   byFuzzyName: publicProcedure
     .input(z.object({ query: z.string(), resultCount: z.number().default(10) }))
     .query(async ({ input }) => {
-      const locations: LocationResponse[] = await hafasClient.locations(
-        input.query,
-        {
-          fuzzy: true,
-          poi: false,
-          addresses: false,
-          results: input.resultCount,
-          lang: "de",
-        }
-      );
 
-      return locations.map(mapLocationResponseToLocation);
+      const result = await Promise.any([getLocationCache(input.query), searchLocations(input.query, input.resultCount)]);
+
+      return result;
+
     }),
   byLocation: publicProcedure
     .input(
@@ -52,3 +47,23 @@ export const locationRouter = router({
       return locations.map(mapLocationResponseToLocation);
     }),
 });
+
+async function searchLocations(query: string, resultCount: number): Promise<LocationModel[]> {
+
+  const locationResponse: LocationResponse[] = await hafasClient.locations(
+    query,
+    {
+      fuzzy: true,
+      poi: false,
+      addresses: false,
+      results: resultCount,
+      lang: "de",
+    }
+  );
+
+  const locations = locationResponse.map(mapLocationResponseToLocation);
+
+  cacheLocationQuery(query, locations);
+
+  return locations;
+}

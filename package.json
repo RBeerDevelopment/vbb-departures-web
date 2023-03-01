@@ -17,6 +17,7 @@
     "@trpc/next": "10.13.2",
     "@trpc/react-query": "10.13.2",
     "@trpc/server": "10.13.2",
+    "@upstash/redis": "^1.20.1",
     "daisyui": "^2.51.2",
     "jotai": "^2.0.2",
     "next": "13.2.1",
