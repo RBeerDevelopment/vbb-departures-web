@@ -38,8 +38,9 @@ const Departures: NextPage = () => {
     refetch,
   } = trpc.departure.byStationId.useQuery(
     { stationId: String(stationId) },
-    { enabled: Boolean(stationId) }
+    { enabled: Boolean(stationId), staleTime: 1000 * 10 }
   );
+
   useCurrentRefetchFns([refetch]);
 
   const lines = [

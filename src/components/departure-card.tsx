@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 import type { Departure } from "@server/trpc/models/departure";
-import { formatTimeHHMM } from "@utils/format-time";
 import { DelayText } from "./delay-text";
 import { formatMinDiffToNow } from "@utils/format-min-diff-to-now";
 
