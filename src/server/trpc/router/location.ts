@@ -6,6 +6,8 @@ import { router, publicProcedure } from "../trpc";
 import { hafasClient } from "@utils/vbb-hafas";
 
 import { cacheLocationQuery, getLocationCache } from "@utils/redis";
+import type { StopResponse } from "../models/response/stop-response";
+import { mapResponseToStop } from "../models/stop";
 
 export const locationRouter = router({
   byFuzzyName: publicProcedure
@@ -15,6 +17,14 @@ export const locationRouter = router({
       const result = await Promise.any([getLocationCache(input.query), searchLocations(input.query, input.resultCount)]);
 
       return result;
+
+    }),
+  byStationId: publicProcedure
+    .input(z.object({ stationId: z.string() }))
+    .query(async ({ input }) => {
+
+      const response: StopResponse = await hafasClient.stop(input.stationId);
+      return mapResponseToStop(response);
 
     }),
   byLocation: publicProcedure

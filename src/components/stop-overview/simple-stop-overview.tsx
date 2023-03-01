@@ -1,5 +1,6 @@
 import { TimeWithDelay } from "@components/time-with-delay";
 import type { Stopover } from "@server/trpc/models/trip";
+import Link from "next/link";
 import React from "react";
 import { StopState } from "./stop-state";
 
@@ -30,11 +31,13 @@ export function SimpleStopOverview(props: Props): React.ReactElement {
           <></>
         )}
       </div>
-      <p
+      <Link
         className={`w-1/2 text-left ${isSelectedStation ? "text-red-600" : ""}`}
+        href={`/departures/${stop.id}`}
+        prefetch={false}
       >
         {stop.stopName}
-      </p>
+      </Link>
       <div className="flex w-1/3 flex-col">
         <TimeWithDelay time={stop.arrival} delay={stop.arrivalDelay} />
         <TimeWithDelay time={stop.departure} delay={stop.departureDelay} />

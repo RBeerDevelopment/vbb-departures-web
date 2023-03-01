@@ -1,3 +1,6 @@
+import type { ProductsResponse } from "./response/products-response";
+import type { StopResponse } from "./response/stop-response";
+
 interface Location {
   type: string;
   id: string;
@@ -5,72 +8,28 @@ interface Location {
   longitude: number;
 }
 
-interface Products {
-  suburban: boolean;
-  subway: boolean;
-  tram: boolean;
-  bus: boolean;
-  ferry: boolean;
-  express: boolean;
-  regional: boolean;
-}
-
 interface Origin {
   name: string;
   location: Location;
-  products: Products;
+  products: ProductsResponse;
   stationDHID: string;
-}
-
-interface Location2 {
-  type: string;
-  id: string;
-  latitude: number;
-  longitude: number;
-}
-
-interface Products2 {
-  suburban: boolean;
-  subway: boolean;
-  tram: boolean;
-  bus: boolean;
-  ferry: boolean;
-  express: boolean;
-  regional: boolean;
 }
 
 interface Destination {
   type: string;
   id: string;
   name: string;
-  location: Location2;
-  products: Products2;
+  location: Location;
+  products: ProductsResponse;
   stationDHID: string;
-}
-
-interface Location3 {
-  type: string;
-  id: string;
-  latitude: number;
-  longitude: number;
-}
-
-interface Products3 {
-  suburban: boolean;
-  subway: boolean;
-  tram: boolean;
-  bus: boolean;
-  ferry: boolean;
-  express: boolean;
-  regional: boolean;
 }
 
 interface Properties {
   type: string;
   id: string;
   name: string;
-  location: Location3;
-  products: Products3;
+  location: Location;
+  products: ProductsResponse;
   stationDHID: string;
 }
 
@@ -152,7 +111,7 @@ export interface TripResponse {
 }
 
 interface StopoverResponse {
-  stop: Stop;
+  stop: StopResponse;
   arrival?: Date;
   plannedArrival?: Date;
   arrivalDelay?: number;
@@ -165,15 +124,6 @@ interface StopoverResponse {
   departurePlatform: string;
   departurePrognosisType: string;
   plannedDeparturePlatform: string;
-}
-
-interface Stop {
-  type: string;
-  id: string;
-  name: string;
-  location: Location;
-  products: Products;
-  stationDHID: string;
 }
 
 export interface Trip {

@@ -41,6 +41,10 @@ const Departures: NextPage = () => {
     { enabled: Boolean(stationId), staleTime: 1000 * 10 }
   );
 
+  const { data: stationDetails } = trpc.location.byStationId.useQuery({
+    stationId: String(stationId),
+  });
+
   useCurrentRefetchFns([refetch]);
 
   const lines = [
@@ -80,10 +84,10 @@ const Departures: NextPage = () => {
       return;
     }
 
-    const stationName = departures ? departures[0]?.stopName || "" : "";
+    if (!stationDetails) return;
 
     setFavoriteStations((prev) => {
-      return [...prev, { id: stationId, name: stationName }];
+      return [...prev, stationDetails];
     });
   }
 
