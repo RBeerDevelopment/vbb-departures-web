@@ -25,7 +25,7 @@ const Home: NextPage = () => {
     refetch,
   } = trpc.location.byFuzzyName.useQuery(
     { query: searchQuery },
-    { enabled: searchQuery.length > 0, staleTime: Infinity }
+    { enabled: searchQuery.length > 2, staleTime: Infinity }
   );
 
   const inputRef = useRef(null);
