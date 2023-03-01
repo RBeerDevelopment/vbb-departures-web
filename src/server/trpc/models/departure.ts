@@ -49,6 +49,7 @@ export const LineType = [
   "express",
   "regional",
 ] as const;
+
 export type LineType = (typeof LineType)[number];
 
 export const LineTypeLabels: Record<LineType, string> = {
