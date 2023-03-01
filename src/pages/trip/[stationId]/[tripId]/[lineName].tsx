@@ -1,4 +1,4 @@
-import { type NextPage } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import type { ReactNode } from "react";
@@ -74,19 +74,12 @@ const Departures: NextPage = () => {
   }
 
   return (
-    <>
-      <Head>
-        <title>VBB Departures</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="mx-auto flex h-screen w-full flex-col justify-center bg-slate-300">
-        <NavBar />
-        <div className="mx-auto flex w-full flex-col items-center overflow-y-scroll py-4 lg:py-16">
-          {content}
-        </div>
-      </main>
-    </>
+    <main className="mx-auto flex h-screen w-full flex-col justify-center bg-slate-300">
+      <NavBar />
+      <div className="mx-auto flex w-full flex-col items-center overflow-y-scroll py-4 lg:py-16">
+        {content}
+      </div>
+    </main>
   );
 };
 
