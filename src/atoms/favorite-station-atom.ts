@@ -1,11 +1,8 @@
+import type { Stop } from "@server/trpc/models/stop";
 import { atomWithStorage } from "jotai/utils";
 
-export interface FavoriteStation {
-  id: string;
-  name: string;
-}
 
-export const favoriteStationAtom = atomWithStorage<FavoriteStation[]>(
+export const favoriteStationAtom = atomWithStorage<Stop[]>(
   "favoriteStations",
   []
 );
