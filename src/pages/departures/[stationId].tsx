@@ -95,12 +95,12 @@ const Departures: NextPage = () => {
     (lineTypes && lineTypes.length > 1) || (lines && lines.length > 1);
 
   return (
-    <main className="mx-auto flex h-screen w-full flex-col bg-slate-300">
+    <main className="mx-auto flex h-screen w-full flex-col bg-slate-300 dark:bg-black">
       <NavBar
         favoriteFn={toggleFavoriteStation}
         isFavorite={isFavoriteStation}
       />
-      <div className="w-full overflow-y-scroll pt-16 pb-4 ">
+      <div className="w-full overflow-y-scroll pt-16 pb-4">
         {hasMultipleLinesOrLineTypes && (
           <div className="flex flex-row gap-4 py-2 pl-3">
             <LineTypeFilter

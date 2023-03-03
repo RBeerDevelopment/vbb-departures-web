@@ -10,7 +10,9 @@ export function NearbyInput(props: Props): React.ReactElement {
 
   return (
     <div className="flex flex-row items-center" onClick={onClick}>
-      <p className="mr-1 text-lg font-light italic text-red-600">Near Me?</p>
+      <p className="mr-1 text-lg font-light italic text-red-600 dark:text-red-500">
+        Near Me?
+      </p>
       {isLoading ? (
         <svg
           aria-hidden="true"

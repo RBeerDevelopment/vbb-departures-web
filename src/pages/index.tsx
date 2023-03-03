@@ -64,10 +64,11 @@ const Home: NextPage = () => {
 
   return (
     <NonSsrWrapper>
-      <main className="mx-auto flex min-h-screen w-full flex-col items-center justify-center bg-slate-300">
+      <main className="mx-auto flex min-h-screen w-full flex-col items-center justify-center bg-slate-300 dark:bg-black">
         <NavBar isMain={true} />
         <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
-          <span className="text-red-600">VBB</span> Departures
+          <span className="text-red-600 dark:text-red-600">VBB</span>{" "}
+          <span className="text-black dark:text-gray-200">Departures</span>
         </h1>
         <DebouncedInput
           ref={inputRef}
@@ -77,7 +78,7 @@ const Home: NextPage = () => {
         />
         <div
           ref={parent as LegacyRef<HTMLDivElement>}
-          className="mt-4 flex max-h-96 w-3/4 flex-col gap-1 divide-y divide-dashed overflow-y-scroll rounded-lg bg-white shadow-lg lg:w-1/4"
+          className="mt-4 flex max-h-96 w-3/4 flex-col divide-y divide-gray-700 overflow-y-scroll rounded-lg bg-white shadow-lg dark:bg-gray-800 lg:w-1/4"
         >
           {isFetching || isFetchingNearby ? (
             <LoadingIndicator />

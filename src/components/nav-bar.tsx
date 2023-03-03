@@ -15,7 +15,7 @@ export function NavBar(props: Props): React.ReactElement {
   if (isMain) return <></>;
 
   return (
-    <div className="fixed top-0 z-50 flex h-16 w-screen flex-row items-center justify-center gap-4 bg-red-600 p-4 shadow-lg">
+    <div className="fixed top-0 z-50 flex h-16 w-screen flex-row items-center justify-center gap-4 bg-red-600 p-4 shadow-lg dark:bg-red-700">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

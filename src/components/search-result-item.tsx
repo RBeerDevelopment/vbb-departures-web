@@ -15,7 +15,7 @@ export function SearchResultItem(props: Props): React.ReactElement {
   return (
     <Link href={`/departures/${id}`}>
       <div
-        className={`flex w-full cursor-pointer flex-col gap-2 bg-white p-4 text-black ${
+        className={`flex w-full cursor-pointer flex-col gap-2 bg-white p-4 text-black dark:bg-gray-900 dark:text-white ${
           rounded && "rounded-md"
         }`}
       >
@@ -23,7 +23,7 @@ export function SearchResultItem(props: Props): React.ReactElement {
         <div className="flex flex-row gap-4">
           <ProductRow products={products} />
           {location.distance && (
-            <p className="text-gray-400">{location.distance}m</p>
+            <p className="text-white">{location.distance}m</p>
           )}
         </div>
       </div>
