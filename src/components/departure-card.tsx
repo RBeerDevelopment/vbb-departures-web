@@ -15,16 +15,17 @@ export function DepartureCard(props: Props): React.ReactElement {
   let lineNameTextColor = "text-white";
 
   if (!isNaN(+departure.lineName) && Number(departure.lineName) > 89) {
-    lineNameTextColor = "text-black border border-black";
+    lineNameTextColor =
+      "text-black border border-black dark:text-white dark:border-gray-200";
   }
 
   return (
     <Link
-      className="my-2 flex w-11/12 flex-row gap-2 rounded-md bg-white py-3 px-2 md:w-1/2"
+      className="my-2 flex w-11/12 flex-row items-center gap-2 rounded-md bg-white py-3 px-2 dark:bg-gray-900 dark:text-white md:w-1/2"
       href={`/trip/${stationId}/${departure.id}/${departure.lineName}`}
     >
       <span
-        className={`h-12 w-12 px-2 py-2 ${lineNameTextColor} rounded-lg text-center text-xl bg-${departure.lineName.toLowerCase()}`}
+        className={`h-12 w-12 px-2 py-2 ${lineNameTextColor} inline-flex items-center justify-center rounded-lg text-xl bg-${departure.lineName.toLowerCase()}`}
       >
         {departure.lineName}
       </span>

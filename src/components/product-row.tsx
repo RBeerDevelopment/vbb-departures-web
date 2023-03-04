@@ -28,15 +28,19 @@ export function ProductRow(props: Props): React.ReactElement {
     }
   });
   return (
-    <div className="flex flex-row gap-0.5">
-      {icons.map((i) => (
+    <div className="flex flex-row gap-1.5 ">
+      {icons.sort(sortIconInverse).map((i) => (
         <span
           key={i.letter}
-          className={`${i.color} h-6 w-6 rounded-md text-center text-lg text-white`}
+          className={`${i.color} inline-flex h-6 w-6 items-center justify-center rounded-md text-lg text-white`}
         >
           {i.letter}
         </span>
       ))}
     </div>
   );
+}
+
+function sortIconInverse(a: Icon, b: Icon) {
+  return b.letter.localeCompare(a.letter);
 }

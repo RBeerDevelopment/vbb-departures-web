@@ -41,7 +41,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
       ref={ref}
       placeholder={placeholder}
       value={localVal}
-      className="text-md mt-8 w-3/4 rounded-md bg-white p-2.5 text-black shadow-lg placeholder:text-center placeholder:italic placeholder:text-slate-400 focus:border-red-700 lg:w-1/4"
+      className="text-md mt-8 w-3/4 rounded-md bg-white p-2.5 text-black shadow-lg placeholder:text-center placeholder:italic placeholder:text-gray-400 focus:border-red-900 focus:ring-red-900 dark:bg-gray-200 dark:placeholder:text-gray-600 lg:w-1/4"
       onChange={handleOnChange}
     />
   );

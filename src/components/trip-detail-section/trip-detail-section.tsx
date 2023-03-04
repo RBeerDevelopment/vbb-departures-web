@@ -78,7 +78,7 @@ export function TripDetailSection(props: Props): React.ReactElement {
   return (
     <DetailCard>
       <div ref={parent as LegacyRef<HTMLDivElement>} className="h-full w-full">
-        <h2 className="pb-2 text-2xl font-medium">Fahrt</h2>
+        <h2 className="pb-2 text-2xl font-medium">Stationen</h2>
         {content}
         <div
           className="flex w-full flex-row justify-center pt-4"
