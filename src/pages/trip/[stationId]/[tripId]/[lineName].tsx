@@ -48,7 +48,7 @@ const Departures: NextPage = () => {
 
   linePolyline = linePolyline?.filter((p) => !(isNaN(p[0]) || isNaN(p[1])));
   let content: ReactNode = (
-    <p className="italic ">No data found for line {lineName}.</p>
+    <p className="italic">No data found for line {lineName}.</p>
   );
 
   if (isLoading) {
@@ -74,7 +74,7 @@ const Departures: NextPage = () => {
   }
 
   return (
-    <main className="mx-auto flex h-screen w-full flex-col justify-center bg-slate-300">
+    <main className="mx-auto flex h-screen w-full flex-col justify-center bg-slate-300 dark:bg-black">
       <NavBar />
       <div className="mx-auto flex w-full flex-col items-center overflow-y-scroll py-4 lg:py-16">
         {content}
