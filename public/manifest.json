@@ -31,8 +31,7 @@
     },
     {
       "src": "/icons/icon-256x256.png",
-      "sizes": "any",
-      "type": "image/png"
+      "sizes": "any"
     }
   ]
 }
