@@ -67,8 +67,8 @@ const Home: NextPage = () => {
       <main className="mx-auto flex min-h-screen w-full flex-col items-center justify-center bg-slate-300 dark:bg-black">
         <NavBar isMain={true} />
         <h1 className="text-5xl font-extrabold leading-normal text-gray-700 md:text-[5rem]">
-          <span className="text-red-600 dark:text-red-600">VBB</span>{" "}
-          <span className="text-black dark:text-gray-200">Departures</span>
+          <span className="text-red-600 dark:text-red-600">Travel</span>{" "}
+          <span className="text-black dark:text-gray-200">12</span>
         </h1>
         <DebouncedInput
           ref={inputRef}
