@@ -4,9 +4,17 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "VBB Departures",
-  "short_name": "VBB Departures",
+  "name": "Travel12",
+  "short_name": "Travel12",
   "description": "An app to see VBB departures including real time delays.",
+  "categories": [
+    "travel",
+    "public transport",
+    "bvg",
+    "vbb",
+    "berlin",
+    "germany"
+  ],
   "orientation": "portrait-primary",
   "icons": [
     {

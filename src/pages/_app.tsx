@@ -12,16 +12,19 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>{`VBB Departures ${!isProd ? "(Preview)" : ""}`}</title>
+        <title>{`Travel12 ${!isProd ? "(Preview)" : ""}`}</title>
         <meta
           name="description"
-          content="An app to see VBB departures including real time delays."
+          content="An app to see all departures within the VBB public tranport network including real time delays."
         />
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
         />
-        <meta name="keywords" content="VBB, Public Transport, Berlin, ÖPNV" />
+        <meta
+          name="keywords"
+          content="VBB, Berlin, Public Transport, Berlin, ÖPNV"
+        />
 
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#DC2626" />
@@ -42,7 +45,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-touch-fullscreen" content="yes" />
-        <meta name="apple-mobile-web-app-title" content="VBB Departures" />
+        <meta name="apple-mobile-web-app-title" content="Travel12" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
