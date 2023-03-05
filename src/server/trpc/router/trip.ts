@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 import { router, publicProcedure } from "../trpc";
-import type { TripResponse } from "../models/trip";
-import { mapTripResponseToTrip } from "../models/trip";
+import type { TripResponse } from "../models/response";
+import { mapResponseToTrip } from "../models";
 import { hafasClient } from "@utils/vbb-hafas";
 
 export const tripRouter = router({
@@ -23,6 +23,6 @@ export const tripRouter = router({
         stopovers,
       });
 
-      return mapTripResponseToTrip(trip);
+      return mapResponseToTrip(trip);
     }),
 });

@@ -1,4 +1,4 @@
-import { LineType, LineTypeLabels } from "@server/trpc/models/departure";
+import { LineType, LineTypeLabels } from "@server/trpc/models/utils";
 import { sortAlphabetically } from "@utils/sort";
 import React from "react";
 

@@ -1,130 +1,5 @@
-import type { ProductsResponse } from "./response/products-response";
-import type { StopResponse } from "./response/stop-response";
-
-interface Location {
-  type: string;
-  id: string;
-  latitude: number;
-  longitude: number;
-}
-
-interface Origin {
-  name: string;
-  location: Location;
-  products: ProductsResponse;
-  stationDHID: string;
-}
-
-interface Destination {
-  type: string;
-  id: string;
-  name: string;
-  location: Location;
-  products: ProductsResponse;
-  stationDHID: string;
-}
-
-interface Properties {
-  type: string;
-  id: string;
-  name: string;
-  location: Location;
-  products: ProductsResponse;
-  stationDHID: string;
-}
-
-interface Geometry {
-  type: string;
-  coordinates: number[];
-}
-
-interface Feature {
-  type: string;
-  properties: Properties;
-  geometry: Geometry;
-}
-
-interface Polyline {
-  type: string;
-  features: Feature[];
-}
-
-interface Operator {
-  type: string;
-  id: string;
-  name: string;
-}
-
-interface Color {
-  fg: string;
-  bg: string;
-}
-
-interface Line {
-  type: string;
-  id: string;
-  fahrtNr: string;
-  name: string;
-  public: boolean;
-  adminCode: string;
-  productName: string;
-  mode: string;
-  product: string;
-  operator: Operator;
-  symbol: string;
-  nr: number;
-  metro: boolean;
-  express: boolean;
-  night: boolean;
-  color: Color;
-}
-
-interface CurrentLocation {
-  type: string;
-  latitude: number;
-  longitude: number;
-}
-
-export interface TripResponse {
-  origin: Origin;
-  destination: Destination;
-  departure: Date;
-  plannedDeparture: Date;
-  departureDelay: number;
-  arrival: Date;
-  plannedArrival: Date;
-  arrivalDelay: number;
-  reachable: boolean;
-  polyline: Polyline;
-  line: Line;
-  direction: string;
-  currentLocation: CurrentLocation;
-  arrivalPlatform?: string;
-  plannedArrivalPlatform?: string;
-  arrivalPrognosisType: string;
-  departurePlatform: string;
-  plannedDeparturePlatform: string;
-  departurePrognosisType: string;
-  id: string;
-  realtimeDataUpdatedAt: number;
-  stopovers?: StopoverResponse[];
-}
-
-interface StopoverResponse {
-  stop: StopResponse;
-  arrival?: Date;
-  plannedArrival?: Date;
-  arrivalDelay?: number;
-  arrivalPlatform: string;
-  arrivalPrognosisType: string;
-  plannedArrivalPlatform: string;
-  departure?: Date;
-  plannedDeparture?: Date;
-  departureDelay?: number;
-  departurePlatform: string;
-  departurePrognosisType: string;
-  plannedDeparturePlatform: string;
-}
+import type { GeoLocation, VbbPolyline } from "./utils";
+import type { StopoverResponse, TripResponse } from "./response";
 
 export interface Trip {
   id: string;
@@ -141,27 +16,16 @@ export interface Trip {
 
   lineName: string;
   direction: string;
-  currentLocation: CurrentLocation;
+  currentLocation: GeoLocation;
   updatedAt: number;
 
-  polyline?: Polyline;
+  polyline?: VbbPolyline;
   stopovers?: Stopover[];
 }
 
-export interface Stopover {
-  id: string;
-  stopName: string;
-  arrival?: Date;
-  plannedArrival?: Date;
-  arrivalDelay?: number;
-  platform: string;
-  plannedPlatform: string;
-  departure?: Date;
-  plannedDeparture?: Date;
-  departureDelay?: number;
-}
 
-export function mapTripResponseToTrip(resp: TripResponse): Trip {
+
+export function mapResponseToTrip(resp: TripResponse): Trip {
   return {
     id: resp.id,
     originName: resp.origin.name,
@@ -178,12 +42,25 @@ export function mapTripResponseToTrip(resp: TripResponse): Trip {
     updatedAt: resp.realtimeDataUpdatedAt,
     polyline: resp.polyline,
     stopovers: resp.stopovers
-      ? resp.stopovers.map(mapStopoverResponseToStopover)
+      ? resp.stopovers.map(mapResponseToStopover)
       : undefined,
   };
 }
 
-function mapStopoverResponseToStopover(resp: StopoverResponse): Stopover {
+export interface Stopover {
+  id: string;
+  stopName: string;
+  arrival?: Date;
+  plannedArrival?: Date;
+  arrivalDelay?: number;
+  platform: string;
+  plannedPlatform: string;
+  departure?: Date;
+  plannedDeparture?: Date;
+  departureDelay?: number;
+}
+
+function mapResponseToStopover(resp: StopoverResponse): Stopover {
   return {
     id: resp.stop.id,
     stopName: resp.stop.name,

@@ -1,4 +1,4 @@
-export interface ProductsResponse {
+export interface ProductsBoolean {
     suburban: boolean;
     subway: boolean;
     tram: boolean;

@@ -2,8 +2,8 @@ import { z } from "zod";
 
 import { router, publicProcedure } from "../trpc";
 import { hafasClient } from "@utils/vbb-hafas/client";
-import type { DepatureResponse } from "../models/departure";
-import { mapDepartureResponseToDeparture } from "../models/departure";
+import type { DepartureResponse } from "../models/response";
+import { mapResponseToDeparture } from "../models";
 
 export const departureRouter = router({
   byStationId: publicProcedure
@@ -17,13 +17,13 @@ export const departureRouter = router({
     .query(async ({ input }) => {
       const { stationId, resultCount, duration } = input;
 
-      const { departures }: { departures: DepatureResponse[] } =
+      const { departures }: { departures: DepartureResponse[] } =
         await hafasClient.departures(stationId, {
           remarks: false,
           results: resultCount,
           duration: duration,
         });
 
-      return departures.map(mapDepartureResponseToDeparture);
+      return departures.map(mapResponseToDeparture);
     }),
 });

@@ -1,5 +1,5 @@
 import { TimeWithDelay } from "@components/time-with-delay";
-import type { Stopover } from "@server/trpc/models/trip";
+import type { Stopover } from "@server/trpc/models";
 import Link from "next/link";
 import React from "react";
 import { StopState } from "./stop-state";
