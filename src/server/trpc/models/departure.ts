@@ -1,66 +1,5 @@
-import type { TransportType } from "./transport-type";
-
-interface Color {
-  fg: string;
-  bg: string;
-}
-
-export interface Line {
-  type: string;
-  id: string;
-  name: string;
-  productName: string;
-  mode: TransportType;
-  product: LineType;
-  symbol: string;
-  nr: number;
-  color: Color;
-}
-
-interface Destination {
-  id: string;
-  name: string;
-}
-
-interface CurrentTripPosition {
-  type: string;
-  latitude: number;
-  longitude: number;
-}
-
-export interface DepatureResponse {
-  tripId: string;
-  when: string;
-  stop: { name: string };
-  delay: number;
-  direction: string;
-  line: Line;
-  type: LineType;
-  destination: Destination;
-  currentTripPosition: CurrentTripPosition;
-}
-
-export const LineType = [
-  "suburban",
-  "subway",
-  "tram",
-  "bus",
-  "ferry",
-  "express",
-  "regional",
-] as const;
-
-export type LineType = (typeof LineType)[number];
-
-export const LineTypeLabels: Record<LineType, string> = {
-  suburban: "S-Bahn",
-  subway: "U-Bahn",
-  tram: "Tram",
-  bus: "Bus",
-  ferry: "Fähre",
-  express: "Express",
-  regional: "Regio",
-} as const;
+import type { LineType, TransportType } from "./utils";
+import type { DepartureResponse } from "./response";
 
 export interface Departure {
   id: string;
@@ -74,8 +13,8 @@ export interface Departure {
   destinationName: string;
 }
 
-export function mapDepartureResponseToDeparture(
-  resp: DepatureResponse
+export function mapResponseToDeparture(
+  resp: DepartureResponse
 ): Departure {
   return {
     id: resp.tripId,

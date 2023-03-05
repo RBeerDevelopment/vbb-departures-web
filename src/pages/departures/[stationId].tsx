@@ -13,7 +13,8 @@ import { useAtom } from "jotai";
 import type { LineTypeWithAll } from "@components/filters";
 import { LineTypeFilter } from "@components/filters";
 import { LineFilter } from "@components/filters";
-import type { Departure, LineType } from "@server/trpc/models/departure";
+import type { Departure } from "@server/trpc/models";
+import type { LineType } from "@server/trpc/models/utils";
 
 const Departures: NextPage = () => {
   const [lineFilter, setLineFilter] = useState<string>("All");

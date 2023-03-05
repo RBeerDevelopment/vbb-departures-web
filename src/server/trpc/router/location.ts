@@ -1,6 +1,7 @@
 import { z } from "zod";
-import type { LocationModel, LocationResponse } from "../models/location";
-import { mapLocationResponseToLocation } from "../models/location";
+import type { LocationModel } from "../models";
+import type { LocationResponse } from "../models/response";
+import { mapResponseToLocation } from "../models";
 
 import { router, publicProcedure } from "../trpc";
 import { hafasClient } from "@utils/vbb-hafas";
@@ -54,7 +55,7 @@ export const locationRouter = router({
         }
       );
 
-      return locations.map(mapLocationResponseToLocation);
+      return locations.map(mapResponseToLocation);
     }),
 });
 
@@ -71,7 +72,7 @@ async function searchLocations(query: string, resultCount: number): Promise<Loca
     }
   );
 
-  const locations = locationResponse.map(mapLocationResponseToLocation);
+  const locations = locationResponse.map(mapResponseToLocation);
 
   cacheLocationQuery(query, locations);
 

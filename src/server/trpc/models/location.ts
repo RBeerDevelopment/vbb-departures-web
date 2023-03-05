@@ -1,32 +1,8 @@
-export interface Products {
-  suburban: boolean;
-  subway: boolean;
-  tram: boolean;
-  bus: boolean;
-  ferry: boolean;
-  express: boolean;
-  regional: boolean;
-}
+import type { LocationResponse } from "./response";
 
-export interface LocationResponse {
-  type: string;
-  id: string;
-  name: string;
-  products: Products;
-  latitude?: number;
-  longitude?: number;
-  distance?: number;
-}
+export type LocationModel = Omit<LocationResponse, "longitude" | "latitude">
 
-export interface LocationModel {
-  type: string;
-  id: string;
-  name: string;
-  products: Products;
-  distance?: number;
-}
-
-export function mapLocationResponseToLocation(
+export function mapResponseToLocation(
   resp: LocationResponse
 ): LocationModel {
   return {

@@ -1,8 +1,8 @@
 import React from "react";
-import type { Products } from "@server/trpc/models/location";
+import type { ProductsBoolean } from "@server/trpc/models/utils";
 
 interface Props {
-  products: Products;
+  products: ProductsBoolean;
 }
 
 interface Icon {
